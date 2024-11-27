@@ -1,30 +1,48 @@
 import {NextRequest, NextResponse} from 'next/server';
 import {getToken} from 'next-auth/jwt';
 
-// Public route, all other routes are protected
-const publicRoute = '/auth';
+const PUBLIC_PAGE_ROUTES = ['/auth'];
+const PUBLIC_API_ROUTES = ['/api/auth/:path*'];
 
-// TODO refactor this to handle protected api routes as well
 export default async function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname;
 
-    // 1. Use getToken to retrieve and verify the session JWT from cookies
-    const session = await getToken({req});
+    // Use getToken to retrieve and verify the token JWT from cookies
+    const token = await getToken({req});
 
-    // 2. Redirect to /auth if the user is not authenticated and is trying to access any protected route
-    if (path !== publicRoute && !session) {
-        return NextResponse.redirect(new URL('/auth', req.nextUrl));
+    // Check if the route is a public api route
+    if (PUBLIC_API_ROUTES.some((route) => path.startsWith(route.replace(':path*', '')))) {
+        return NextResponse.next();
     }
 
-    // 3. Redirect to root ("/") if the user is authenticated and tries to access the /auth page
-    if (path === publicRoute && session) {
-        return NextResponse.redirect(new URL('/', req.nextUrl));
+    // Check if the route is a public page route
+    if (PUBLIC_PAGE_ROUTES.includes(path)) {
+        // Redirect authenticated users away from the /auth page
+        if (token) {
+            return NextResponse.redirect(new URL('/', req.nextUrl));
+        }
+        return NextResponse.next();
+    }
+
+    // Protected API routes
+    if (path.startsWith('/api') && !token) {
+        return NextResponse.json({message: "Unauthorized"}, {status: 401});
+    }
+
+    // Protected page routes
+    if (!path.startsWith('/api') && !token) {
+        return NextResponse.redirect(new URL('/auth', req.nextUrl));
     }
 
     return NextResponse.next();
 }
 
-// Routes Middleware should not run on
+// Config defines the routes that the middleware should run on
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+    matcher: [
+        // Match all API routes
+        '/api/:path*',
+        // Match all page routes except for static assets and public files
+        '/((?!_next/static|_next/image|.*\\.png$).*)',
+    ],
 };

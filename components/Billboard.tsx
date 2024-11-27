@@ -11,8 +11,10 @@ export default function Billboard() {
     const {openModal} = useInfoModal()
 
     const handleOpenModal = useCallback(() => {
-        openModal(data?.id)
+        if (data) openModal(data?.id)
     }, [openModal, data]);
+
+    if (!data) return null
 
     return (
         <div className="relative h-[56.25vw]">

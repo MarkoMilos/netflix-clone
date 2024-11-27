@@ -1,35 +1,22 @@
-import prisma from "@/lib/prismadb";
 import {NextResponse} from "next/server";
-import bcrypt from "bcrypt";
+import {UserService} from "@/service/UserService";
+
+const userService = new UserService();
+
+// TODO this API route should be protected with CAPTCHA in order to prevent bots from creating accounts
 
 export async function POST(req: Request) {
     try {
         const body = await req.json();
         const {email, name, password} = body;
 
-        const existingUser = await prisma.user.findUnique({
-            where: {
-                email
-            }
-        });
-
-        if (existingUser) {
-            return NextResponse.json({message: "User already exists"}, {status: 422});
+        try {
+            const user = await userService.createUser(email, name, password);
+            return NextResponse.json(user);
+        } catch (error: unknown) {
+            const err = error as Error;
+            return NextResponse.json({message: err.message}, {status: 422});
         }
-
-        const hashedPassword = await bcrypt.hash(password, 12);
-
-        const user = await prisma.user.create({
-            data: {
-                email,
-                name,
-                hashedPassword,
-                image: "",
-                emailVerified: new Date()
-            }
-        });
-
-        return NextResponse.json(user);
     } catch (error) {
         console.error(error);
         return NextResponse.json({message: "Internal server error"}, {status: 500});

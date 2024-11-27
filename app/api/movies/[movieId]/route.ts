@@ -1,27 +1,18 @@
 import {NextRequest, NextResponse} from "next/server";
-import {getToken} from "next-auth/jwt";
-import prisma from "@/lib/prismadb";
+import {MovieRepository} from "@/repository/MovieRepository";
 
-export async function GET(request: NextRequest, {params}: { params: { movieId: string } }) {
-    const token = await getToken({req: request});
-    if (!token || !token.email) {
-        return NextResponse.json({message: "Unauthorized"}, {status: 401});
-    }
-
+export async function GET(_req: NextRequest, {params}: { params: { movieId: string } }) {
     const movieId = params.movieId;
     if (!movieId) {
         return NextResponse.json({message: "Movie id is required"}, {status: 400});
     }
 
-    const movie = await prisma.movie.findUnique({
-        where: {
-            id: movieId,
-        },
-    });
+    const movieRepository = new MovieRepository();
+    const movie = await movieRepository.getById(movieId);
 
-    if (!movie) {
+    if (movie) {
+        return NextResponse.json(movie, {status: 200});
+    } else {
         return NextResponse.json({message: "Movie not found"}, {status: 404});
     }
-
-    return NextResponse.json(movie, {status: 200});
 }

@@ -1,16 +1,8 @@
-import {NextRequest, NextResponse} from "next/server";
-import {getToken} from "next-auth/jwt";
-import prisma from "@/lib/prismadb";
+import {NextResponse} from "next/server";
+import {MovieRepository} from "@/repository/MovieRepository";
 
-export async function GET(req: NextRequest) {
-    // Retrieve and verify the token from the HTTP-only cookie
-    const token = await getToken({req, secret: process.env.NEXTAUTH_SECRET});
-
-    // If no valid token is found, deny access
-    if (!token) {
-        return NextResponse.json({message: "Unauthorized"}, {status: 401});
-    }
-
-    const movies = await prisma.movie.findMany();
+export async function GET() {
+    const movieRepository = new MovieRepository()
+    const movies = await movieRepository.getAll();
     return NextResponse.json(movies, {status: 200});
 }

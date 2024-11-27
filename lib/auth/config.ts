@@ -24,6 +24,7 @@ const authConfig: AuthOptions = {
                 password: {label: "Password", type: "password"}
             },
             async authorize(credentials) {
+                // TODO migrate this to a service
                 if (!credentials?.email || !credentials?.password) {
                     throw new Error('Missing credentials');
                 }

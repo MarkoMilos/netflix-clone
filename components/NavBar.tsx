@@ -61,15 +61,9 @@ export default function NavBar() {
                     priority
                 />
 
-                <div className="
-                    flex-row
-                    ml-8
-                    gap-7
-                    hidden
-                    lg:flex
-                ">
+                <div className="flex-row ml-8 gap-7 hidden lg:flex">
                     <NavBarItem label="Home"/>
-                    <NavBarItem label="Series"/>
+                    <NavBarItem label="Series" path={"/shows"}/>
                     <NavBarItem label="Films"/>
                     <NavBarItem label="New & Popular"/>
                     <NavBarItem label="My List"/>

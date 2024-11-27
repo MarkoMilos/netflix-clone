@@ -1,13 +1,14 @@
 import {isEmpty} from "lodash";
 import ContentCard from "@/components/ContentCard";
+import {Movie} from "@/types";
 
 interface MovieListProps {
-    data: Record<string, any>[],
+    movies: Movie[]
     title: string
 }
 
-export default function MovieList({data, title}: MovieListProps) {
-    if (isEmpty(data)) {
+export default function MovieList({movies, title}: MovieListProps) {
+    if (isEmpty(movies)) {
         return null;
     }
 
@@ -18,8 +19,8 @@ export default function MovieList({data, title}: MovieListProps) {
                     {title}
                 </p>
                 <div className="grid grid-cols-4 gap-2">
-                    {data.map((movie) => (
-                        <ContentCard key={movie.id} data={movie}/>
+                    {movies.map((movie) => (
+                        <ContentCard key={movie.id} movie={movie}/>
                     ))}
                 </div>
             </div>

@@ -7,14 +7,14 @@ import FavouriteButton from "@/components/FavouriteButton";
 
 interface InfoModalProps {
     visible?: boolean;
-    onClose: any;
+    onClose: () => void;
 }
 
 export default function InfoModal({visible, onClose}: InfoModalProps) {
     const [isVisible, setIsVisible] = useState(false);
 
     const {movieId} = useInfoModal();
-    const {data = {}} = useMovie(movieId as string);
+    const {data} = useMovie(movieId as string);
 
     useEffect(() => {
         if (visible) {
@@ -110,8 +110,8 @@ export default function InfoModal({visible, onClose}: InfoModalProps) {
                                 {data?.title}
                             </p>
                             <div className="flex flex-row gap-4 items-center">
-                                <PlayButton movieId={data?.id}/>
-                                <FavouriteButton movieId={data?.id}/>
+                                <PlayButton movieId={data?.id || ''}/>
+                                <FavouriteButton movieId={data?.id || ''}/>
                             </div>
                         </div>
 

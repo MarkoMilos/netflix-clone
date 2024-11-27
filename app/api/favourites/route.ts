@@ -1,29 +1,14 @@
 import {NextRequest, NextResponse} from "next/server";
-import {getToken} from "next-auth/jwt";
-import prisma from "@/lib/prismadb";
+import {authUser} from "@/lib/auth/session";
+import {MovieRepository} from "@/repository/MovieRepository";
 
 export async function GET(req: NextRequest) {
-    const token = await getToken({req});
-    if (!token || !token.email) {
-        return NextResponse.json({message: "Unauthorized"}, {status: 401});
-    }
-
-    const user = await prisma.user.findUnique({
-        where: {
-            email: token.email,
-        },
-    });
+    const user = await authUser(req);
     if (!user) {
         return NextResponse.json({message: "User not found"}, {status: 404});
     }
 
-    const favouriteMovies = await prisma.movie.findMany({
-        where: {
-            id: {
-                in: user.favouriteIds,
-            },
-        },
-    });
-
+    const movieRepository = new MovieRepository();
+    const favouriteMovies = await movieRepository.getByIds(user.favouriteIds);
     return NextResponse.json(favouriteMovies, {status: 200});
 }

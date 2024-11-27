@@ -23,8 +23,8 @@ export default function HomePage() {
             <NavBar/>
             <Billboard/>
             <div className="pb-40">
-                <MovieList data={movies} title="Trending Now"/>
-                <MovieList data={favourites} title="My List"/>
+                <MovieList movies={movies} title="Trending Now"/>
+                <MovieList movies={favourites} title="My List"/>
             </div>
         </>
     );

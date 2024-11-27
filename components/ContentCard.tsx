@@ -5,12 +5,13 @@ import FavouriteButton from "@/components/FavouriteButton";
 import {useRouter} from "next/navigation";
 import useInfoModal from "@/hooks/useInfoModal";
 import {BiChevronDown} from "react-icons/bi";
+import {Movie} from "@/types";
 
 interface ContentCardProps {
-    data: Record<string, any>
+    movie: Movie
 }
 
-export default function ContentCard({data}: ContentCardProps) {
+export default function ContentCard({movie}: ContentCardProps) {
     const router = useRouter();
     const {openModal} = useInfoModal();
 
@@ -31,7 +32,7 @@ export default function ContentCard({data}: ContentCardProps) {
                     w-full
                     h-[12vw]
                 "
-                src={data.thumbnailUrl}
+                src={movie.thumbnailUrl}
                 alt="thumbnail"
             />
 
@@ -63,7 +64,7 @@ export default function ContentCard({data}: ContentCardProps) {
                         w-full
                         h-[12vw]
                     "
-                    src={data.thumbnailUrl}
+                    src={movie.thumbnailUrl}
                     alt="thumbnail"
                 />
 
@@ -95,15 +96,15 @@ export default function ContentCard({data}: ContentCardProps) {
                                 transition
                                 hover:bg-neutral-300
                             "
-                            onClick={() => router.push(`/watch/${data.id}`)}
+                            onClick={() => router.push(`/watch/${movie.id}`)}
                         >
                             <BsFillPlayFill size={30}/>
                         </div>
 
-                        <FavouriteButton movieId={data.id}/>
+                        <FavouriteButton movieId={movie.id}/>
 
                         <div
-                            onClick={() => openModal(data.id)}
+                            onClick={() => openModal(movie.id)}
                             className="
                                 cursor-pointer
                                 ml-auto
@@ -125,11 +126,11 @@ export default function ContentCard({data}: ContentCardProps) {
                     </p>
 
                     <div className="flex flex-row gap-2 items-center">
-                        <p className="text-white text-[10px] lg:text-sm">{data.duration}</p>
+                        <p className="text-white text-[10px] lg:text-sm">{movie.duration}</p>
                     </div>
 
                     <div className="flex flex-row gap-2 items-center">
-                        <p className="text-white text-[10px] lg:text-sm">{data.genre}</p>
+                        <p className="text-white text-[10px] lg:text-sm">{movie.genre}</p>
                     </div>
 
                 </div>
