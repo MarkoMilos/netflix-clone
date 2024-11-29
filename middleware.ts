@@ -42,7 +42,7 @@ export const config = {
     matcher: [
         // Match all API routes
         '/api/:path*',
-        // Match all page routes except for static assets and public files
-        '/((?!_next/static|_next/image|.*\\.png$).*)',
+        // Match all page routes except for static assets, public files, and favicon
+        '/((?!_next/static|_next/image|.*\\.png$|.*\\.ico$).*)',
     ],
 };

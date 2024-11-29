@@ -62,12 +62,12 @@ export default function NavBar() {
                 />
 
                 <div className="flex-row ml-8 gap-7 hidden lg:flex">
-                    <NavBarItem label="Home"/>
+                    <NavBarItem label="Home" path={"/"}/>
                     <NavBarItem label="Series" path={"/shows"}/>
-                    <NavBarItem label="Films"/>
-                    <NavBarItem label="New & Popular"/>
-                    <NavBarItem label="My List"/>
-                    <NavBarItem label="Browse by languages"/>
+                    <NavBarItem label="Films" path={"/movies"}/>
+                    <NavBarItem label="New & Popular" path={"/latest"}/>
+                    <NavBarItem label="My List" path={"/mylist"}/>
+                    <NavBarItem label="Browse by languages" path={"/browse"}/>
                 </div>
 
                 <div

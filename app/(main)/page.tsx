@@ -1,6 +1,5 @@
 "use client";
 
-import NavBar from "@/components/NavBar";
 import Billboard from "@/components/Billboard";
 import MovieList from "@/components/MovieList";
 import useMovieList from "@/hooks/useMovieList";
@@ -12,6 +11,8 @@ export default function HomePage() {
     // TODO this can be rendered on the server
     const {data: movies = []} = useMovieList();
     const {data: favourites = []} = useFavourites();
+
+    // TODO do we need this info modal here?
     const {isOpen, closeModal} = useInfoModal();
 
     return (
@@ -20,7 +21,6 @@ export default function HomePage() {
                 visible={isOpen}
                 onClose={closeModal}
             />
-            <NavBar/>
             <Billboard/>
             <div className="pb-40">
                 <MovieList movies={movies} title="Trending Now"/>
