@@ -5,6 +5,7 @@ import useFavourites from "@/hooks/useFavourites";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import {useCallback, useMemo} from "react";
 import axios from "axios";
+import {User} from "@/types";
 
 interface FavouriteButtonProps {
     movieId: string;
@@ -15,7 +16,7 @@ export default function FavouriteButton({movieId}: FavouriteButtonProps) {
     const {data: currentUser, mutate} = useCurrentUser();
 
     const isFavourite = useMemo(() => {
-        const list: [string] = currentUser?.favouriteIds || [];
+        const list: string[] = currentUser?.favouriteIds || [];
         return list.includes(movieId);
     }, [currentUser, movieId]);
 
@@ -27,12 +28,12 @@ export default function FavouriteButton({movieId}: FavouriteButtonProps) {
             response = axios.post(`/api/favourite`, {movieId});
         }
 
-        const updatedFavouriteIds = await response.then(res => res.data.favouriteIds);
+        const updatedFavouriteIds: string[] = await response.then(res => res.data.favouriteIds);
 
         await mutate({
             ...currentUser,
             favouriteIds: updatedFavouriteIds
-        });
+        } as User);
 
         await mutateFavourites()
     }, [movieId, isFavourite, currentUser, mutate, mutateFavourites]);

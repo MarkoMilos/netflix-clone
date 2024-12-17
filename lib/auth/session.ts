@@ -4,6 +4,7 @@ import authConfig from "@/lib/auth/config";
 import {NextRequest} from "next/server";
 import {getToken} from "next-auth/jwt";
 import {UserRepository} from "@/repository/UserRepository";
+import {User} from "@/types";
 
 /**
  * Retrieves the server session based on the provided arguments.
@@ -29,21 +30,55 @@ export default function authSession(
 }
 
 /**
- * Retrieves the user from the request.
+ * Retrieves the authenticated user from either a request or the current session.
  *
- * This function extracts the JWT token from the request using `getToken` and
- * then fetches the user from the database based on the email present in the token.
+ * This function supports two use cases:
+ * 1. When a `NextRequest` is provided, it extracts the JWT token from the request
+ *    and fetches the user from the database based on the email in the token.
+ * 2. When no `NextRequest` is provided, it retrieves the current session,
+ *    extracts the user's email, and fetches the corresponding user from the database.
  *
- * @param req - The request object.
- * @returns The user object if found, otherwise null.
+ * @function
+ * @overload
+ * @async
+ * @param {NextRequest} [req] - The HTTP request object containing cookies and headers (optional).
+ * @returns {Promise<User | null>} A promise that resolves to the user object if authenticated, or `null` if:
+ * - The user is not authenticated.
+ * - The user does not exist in the database.
+ *
+ * @example
+ * // Using authUser with a NextRequest
+ * const user = await authUser(req);
+ * if (user) {
+ *   console.log(`Authenticated user: ${user.name}`);
+ * }
+ *
+ * @example
+ * // Using authUser without a request (server-side session)
+ * const user = await authUser();
+ * if (user) {
+ *   console.log(`Authenticated user: ${user.name}`);
+ * }
  */
-export async function authUser(req: NextRequest) {
-    const token = await getToken({req});
+export async function authUser(req: NextRequest): Promise<User | null>;
+export async function authUser(): Promise<User | null>;
 
-    if (!token || !token.email) {
-        return null;
+export async function authUser(req?: NextRequest) {
+    if (req) {
+        const token = await getToken({req});
+
+        if (!token || !token.email) {
+            return null;
+        }
+
+        const userRepository = new UserRepository();
+        return userRepository.findByEmail(token.email);
+    } else {
+        const session = await authSession();
+        const email = session?.user?.email;
+        if (!email) return null;
+
+        const userRepository = new UserRepository();
+        return userRepository.findByEmail(email);
     }
-
-    const userRepository = new UserRepository()
-    return userRepository.findByEmail(token.email)
 }

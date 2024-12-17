@@ -1,13 +1,16 @@
 "use client";
 
-import useBillboard from "@/hooks/useBillboard";
 import {AiOutlineInfoCircle} from "react-icons/ai";
 import PlayButton from "@/components/PlayButton";
 import {useCallback} from "react";
 import useInfoModal from "@/hooks/useInfoModal";
+import {Movie} from "@/types";
 
-export default function Billboard() {
-    const {data} = useBillboard()
+interface BillboardProps {
+    data: Movie | null
+}
+
+export default function Billboard({data}: BillboardProps) {
     const {openModal} = useInfoModal()
 
     const handleOpenModal = useCallback(() => {
@@ -17,7 +20,7 @@ export default function Billboard() {
     if (!data) return null
 
     return (
-        <div className="relative h-[56.25vw]">
+        <div className="absolute w-full h-[56.25vw]">
             <video
                 className="w-full h-[56.25vw] object-cover brightness-[60%]"
                 src={data?.videoUrl}
@@ -27,6 +30,10 @@ export default function Billboard() {
                 loop
             />
 
+            {/* Gradient Overlay */}
+            <div className="absolute bottom-0 left-0 w-full h-[20%] bg-gradient-to-t from-zinc-900 to-transparent"/>
+
+            {/* Meta info */}
             <div className="absolute top-[30%] md:top-[40%] ml-4 md:ml-16 w-full">
                 <p className="text-white text-1xl md:text-5xl h-full w-[50%] lg:text-6xl font-bold drop-shadow-xl">
                     {data?.title}
@@ -45,7 +52,6 @@ export default function Billboard() {
                         More info
                     </button>
                 </div>
-
             </div>
 
         </div>

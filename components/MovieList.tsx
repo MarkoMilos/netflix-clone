@@ -18,7 +18,7 @@ export default function MovieList({movies, title}: MovieListProps) {
                 <p className="text-white text-md md:text-xl lg:text-2xl font-semibold mb-4">
                     {title}
                 </p>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2">
                     {movies.map((movie) => (
                         <ContentCard key={movie.id} movie={movie}/>
                     ))}

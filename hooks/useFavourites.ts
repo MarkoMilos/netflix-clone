@@ -2,11 +2,12 @@ import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 import {Movie} from "@/types";
 
-const useFavourites = () => {
+const useFavourites = (initialData?: Movie[]) => {
     const {data, error, isLoading, mutate} = useSWR<Movie[]>("/api/favourites", fetcher, {
         revalidateOnFocus: false,
         revalidateIfStale: false,
-        revalidateOnReconnect: false
+        revalidateOnReconnect: false,
+        fallbackData: initialData
     });
 
     return {

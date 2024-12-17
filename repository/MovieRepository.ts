@@ -2,7 +2,7 @@ import {Movie} from "@/types";
 import prisma from "@/lib/prismadb";
 import {Movie as PrismaMovie} from "@prisma/client";
 
-export class MovieRepository {
+class MovieRepository {
 
     async getAll(): Promise<Movie[]> {
         const prismaMovies = await prisma.movie.findMany();
@@ -53,3 +53,6 @@ export class MovieRepository {
         }
     }
 }
+
+const movieRepository = new MovieRepository();
+export {movieRepository, MovieRepository};

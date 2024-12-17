@@ -1,7 +1,7 @@
 import {MovieRepository} from "@/repository/MovieRepository";
 import {Movie} from "@/types";
 
-export class MovieService {
+class MovieService {
 
     private readonly movieRepository = new MovieRepository();
 
@@ -14,3 +14,7 @@ export class MovieService {
         return this.movieRepository.atIndex(randomIndex);
     }
 }
+
+const movieService = new MovieService();
+
+export {movieService, MovieService};

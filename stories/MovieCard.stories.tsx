@@ -1,6 +1,6 @@
 import type {Meta, StoryObj} from '@storybook/react';
 
-import MovieCard from "@/components/MovieCard";
+import MovieCard from "@/components/MovieCard/MovieCard";
 
 const meta: Meta<typeof MovieCard> = {
     title: 'Components/MovieCard',
@@ -16,8 +16,11 @@ const meta: Meta<typeof MovieCard> = {
         movie: {
             id: "1",
             title: "Movie Title",
-            posterUrl: "https://picsum.photos/500/300",
-            description: "Movie Description"
+            thumbnailUrl: "https://picsum.photos/500/300",
+            description: "Movie Description",
+            videoUrl: "https://example.com/video.mp4",
+            genre: "Action",
+            duration: "120"
         }
     },
     decorators: [
@@ -40,7 +43,7 @@ export const NoPoster: Story = {
         // @ts-expect-error - use default args and override posterUrl
         movie: {
             ...meta.args!.movie,
-            posterUrl: "",
+            thumbnailUrl: "",
         }
     },
 }

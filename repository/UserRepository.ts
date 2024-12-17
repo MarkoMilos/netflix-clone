@@ -2,7 +2,7 @@ import prisma from "@/lib/prismadb";
 import {User} from "@/types";
 import {User as PrismaUser} from "@prisma/client";
 
-export class UserRepository {
+class UserRepository {
 
     async create(email: string, name: string, hashedPassword: string): Promise<User> {
         const prismaUser = await prisma.user.create({
@@ -50,3 +50,6 @@ export class UserRepository {
         }
     }
 }
+
+const userRepository = new UserRepository();
+export {userRepository, UserRepository};

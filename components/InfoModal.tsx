@@ -1,3 +1,5 @@
+"use client";
+
 import {useCallback, useEffect, useState} from "react";
 import useInfoModal from "@/hooks/useInfoModal";
 import useMovie from "@/hooks/useMovie";
@@ -5,37 +7,32 @@ import {AiOutlineClose} from "react-icons/ai";
 import PlayButton from "@/components/PlayButton";
 import FavouriteButton from "@/components/FavouriteButton";
 
-interface InfoModalProps {
-    visible?: boolean;
-    onClose: () => void;
-}
-
-export default function InfoModal({visible, onClose}: InfoModalProps) {
+export default function InfoModal() {
     const [isVisible, setIsVisible] = useState(false);
 
-    const {movieId} = useInfoModal();
+    const {movieId, isOpen, closeModal} = useInfoModal();
     const {data} = useMovie(movieId as string);
 
     useEffect(() => {
-        if (visible) {
+        if (isOpen) {
             // Delay setting isVisible to true to trigger animation
             const timer = setTimeout(() => setIsVisible(true), 10);
             return () => clearTimeout(timer); // Cleanup timer on unmount
         } else {
             setIsVisible(false); // Trigger exit animation
         }
-    }, [visible]);
+    }, [isOpen]);
 
     const handleClose = useCallback(() => {
         // Set visible to false to trigger the animation
         setIsVisible(false);
         // Call close that will set visible to false after 300ms to avoid early unmount
         setTimeout(() => {
-            onClose();
+            closeModal();
         }, 300);
-    }, [onClose]);
+    }, [closeModal]);
 
-    if (!visible) return null;
+    if (!isOpen) return null;
 
     return (
         <div className="

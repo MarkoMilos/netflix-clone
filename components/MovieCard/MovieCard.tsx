@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import {Movie} from "@/models/movie";
+import {Movie} from "@/types";
+import styles from './MovieCard.module.css';
 
 interface MovieCardProps {
     movie: Movie
@@ -8,16 +9,16 @@ interface MovieCardProps {
 
 export default function MovieCard({movie}: MovieCardProps) {
     return (
-        <div className="movie-card w-full aspect-[7/4] relative">
+        <div className={`${styles.card} w-full aspect-[7/4] relative`}>
             <Image
-                src={movie.posterUrl}
+                src={movie.thumbnailUrl}
                 alt={movie.title}
                 fill={true}
                 style={{
                     objectFit: 'cover',
                 }}
             />
-            <div className="overlay"/>
+            <div className={styles.overlay}/>
         </div>
     )
 }
