@@ -34,12 +34,12 @@ export default function Billboard({data}: BillboardProps) {
             <div className="absolute bottom-0 left-0 w-full h-[20%] bg-gradient-to-t from-zinc-900 to-transparent"/>
 
             {/* Meta info */}
-            <div className="absolute top-[30%] md:top-[40%] ml-4 md:ml-16 w-full">
-                <p className="text-white text-1xl md:text-5xl h-full w-[50%] lg:text-6xl font-bold drop-shadow-xl">
+            <div className="absolute top-[30%] 2xl:top-[40%] ml-4 md:ml-16 w-full">
+                <p className="text-white text-1xl md:text-3xl lg:text-5xl xl:text-6xl h-full w-[50%] font-bold drop-shadow-xl">
                     {data?.title}
                 </p>
 
-                <p className="text-white text-[8px] md:text-lg mt-3 md:mt-8 w-[90%] md:w-[80%] lg:w-[50%] drop-shadow-xl">
+                <p className="text-white text-[8px] md:text-[10px] lg:text-[12px] xl:text-lg mt-3 md:mt-8 w-[90%] md:w-[80%] lg:w-[65%] xl:w-[50%] drop-shadow-xl">
                     {data?.description}
                 </p>
 
