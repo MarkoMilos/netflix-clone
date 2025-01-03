@@ -1,7 +1,73 @@
 {
   "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals",
-    "next/typescript",
-    "plugin:storybook/recommended"
-  ]
+    "plugin:tailwindcss/recommended",
+    "plugin:storybook/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "tailwindcss",
+    "storybook",
+    "prettier"
+  ],
+  "rules": {
+    "no-else-return": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".jsx",
+          ".tsx"
+        ]
+      }
+    ],
+    "react/require-default-props": [
+      "error",
+      {
+        "functions": "defaultArguments"
+      }
+    ],
+    "jsx-a11y/media-has-captionjsx-a11y/media-has-caption": "off",
+    "tailwindcss/no-custom-classname": "off",
+    "import/no-unresolved": "error",
+    "import/extensions": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          [
+            "builtin",
+            "external"
+          ],
+          [
+            "internal",
+            "sibling",
+            "index"
+          ]
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "prettier/prettier": "error"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    }
+  }
 }

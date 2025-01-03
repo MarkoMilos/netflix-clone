@@ -1,8 +1,9 @@
-import {NextResponse} from "next/server";
-import {MovieService} from "@/service/MovieService";
+import { NextResponse } from "next/server";
 
+import movieService from "@/service/MovieService";
+
+/* eslint-disable import/prefer-default-export */
 export async function GET() {
-    const movieService = new MovieService()
-    const randomMovie = await movieService.getRandomMovie();
-    return NextResponse.json(randomMovie, {status: 200});
+  const randomMovie = await movieService.getRandomMovie();
+  return NextResponse.json(randomMovie, { status: 200 });
 }

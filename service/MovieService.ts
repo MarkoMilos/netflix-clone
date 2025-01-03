@@ -1,20 +1,24 @@
-import {MovieRepository} from "@/repository/MovieRepository";
-import {Movie} from "@/types";
+import movieRepository from "@/repository/MovieRepository";
+import { Movie } from "@/types";
 
-class MovieService {
-
-    private readonly movieRepository = new MovieRepository();
-
-    async getRandomMovie(): Promise<Movie | null> {
-        const movieCount = await this.movieRepository.count();
-        if (movieCount === 0) {
-            return null;
-        }
-        const randomIndex = Math.floor(Math.random() * movieCount);
-        return this.movieRepository.atIndex(randomIndex);
+const movieService = {
+  /**
+   * Get a random movie from the repository.
+   * Returns `null` if there are no movies available.
+   */
+  async getRandomMovie(): Promise<Movie | null> {
+    // Get the total count of movies
+    const movieCount = await movieRepository.count();
+    if (movieCount === 0) {
+      return null; // Return null if no movies exist
     }
-}
 
-const movieService = new MovieService();
+    // Generate a random index
+    const randomIndex = Math.floor(Math.random() * movieCount);
 
-export {movieService, MovieService};
+    // Fetch the movie at the random index
+    return movieRepository.atIndex(randomIndex);
+  },
+};
+
+export default movieService;

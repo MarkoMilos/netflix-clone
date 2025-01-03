@@ -1,55 +1,36 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 import useCurrentUser from "@/hooks/useCurrentUser";
-import {useRouter} from "next/navigation";
 
 export default function Profiles() {
-    const {data: user} = useCurrentUser()
-    const router = useRouter()
+  const { data: user } = useCurrentUser();
+  const router = useRouter();
 
-    return (
-        <div className="flex justify-center items-center h-full">
-            <div className="flex flex-col">
+  return (
+    <div className="flex h-full items-center justify-center">
+      <div className="flex flex-col">
+        <h1 className="text-center text-3xl text-white md:text-6xl">Who is watching?</h1>
 
-                <h1 className="text-white text-3xl md:text-6xl text-center">Who is watching?</h1>
-
-                <div className="flex items-center justify-center gap-8 mt-10">
-
-                    <div
-                        className="group"
-                        onClick={() => {
-                            router.push("/")
-                        }}>
-                        <div className="
-                                w-44
-                                h-44
-                                rounded-md
-                                flex
-                                items-center
-                                justify-center
-                                border-2
-                                border-transparent
-                                group-hover:cursor-pointer
-                                group-hover:border-white
-                                overflow-hidden
-                            ">
-                            <Image src="/images/profile.png" alt="profile" width={176} height={176}/>
-                        </div>
-
-                        <div className="
-                                mt-4
-                                text-gray-400
-                                text-2xl
-                                text-center
-                                group-hover:text-white
-                            ">
-                            {user?.name}
-                        </div>
-                    </div>
-
-                </div>
+        <div className="mt-10 flex items-center justify-center gap-8">
+          <button
+            type="button"
+            onClick={() => {
+              router.push("/");
+            }}
+            className="group flex flex-col items-center"
+          >
+            <div className="flex size-44 items-center justify-center overflow-hidden rounded-md border-2 border-transparent group-hover:cursor-pointer group-hover:border-white">
+              <Image src="/images/profile.png" alt="profile" width={176} height={176} />
             </div>
+            <div className="mt-4 text-center text-2xl text-gray-400 group-hover:text-white">
+              {user?.name}
+            </div>
+          </button>
         </div>
-    )
+      </div>
+    </div>
+  );
 }

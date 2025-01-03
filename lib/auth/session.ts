@@ -1,10 +1,11 @@
-import type {GetServerSidePropsContext, NextApiRequest, NextApiResponse,} from "next"
-import {getServerSession} from "next-auth"
+import type { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
+import { NextRequest } from "next/server";
+import { getServerSession } from "next-auth";
+import { getToken } from "next-auth/jwt";
+
 import authConfig from "@/lib/auth/config";
-import {NextRequest} from "next/server";
-import {getToken} from "next-auth/jwt";
-import {UserRepository} from "@/repository/UserRepository";
-import {User} from "@/types";
+import userRepository from "@/repository/UserRepository";
+import { User } from "@/types";
 
 /**
  * Retrieves the server session based on the provided arguments.
@@ -21,12 +22,12 @@ import {User} from "@/types";
  * @returns The server session object.
  */
 export default function authSession(
-    ...args:
-        | [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]]
-        | [NextApiRequest, NextApiResponse]
-        | []
+  ...args:
+    | [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]]
+    | [NextApiRequest, NextApiResponse]
+    | []
 ) {
-    return getServerSession(...args, authConfig)
+  return getServerSession(...args, authConfig);
 }
 
 /**
@@ -64,21 +65,19 @@ export async function authUser(req: NextRequest): Promise<User | null>;
 export async function authUser(): Promise<User | null>;
 
 export async function authUser(req?: NextRequest) {
-    if (req) {
-        const token = await getToken({req});
+  if (req) {
+    const token = await getToken({ req });
 
-        if (!token || !token.email) {
-            return null;
-        }
-
-        const userRepository = new UserRepository();
-        return userRepository.findByEmail(token.email);
-    } else {
-        const session = await authSession();
-        const email = session?.user?.email;
-        if (!email) return null;
-
-        const userRepository = new UserRepository();
-        return userRepository.findByEmail(email);
+    if (!token || !token.email) {
+      return null;
     }
+
+    return userRepository.findByEmail(token.email);
+  } else {
+    const session = await authSession();
+    const email = session?.user?.email;
+    if (!email) return null;
+
+    return userRepository.findByEmail(email);
+  }
 }

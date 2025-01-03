@@ -1,110 +1,96 @@
 "use client";
 
 import Image from "next/image";
-import NavBarItem from "@/components/NavBarItem";
-import {BsBell, BsChevronDown, BsSearch} from "react-icons/bs";
-import MobileMenu from "@/components/MobileMenu";
-import {useCallback, useEffect, useState} from "react";
+import { useCallback, useEffect, useState } from "react";
+import { BsBell, BsChevronDown, BsSearch } from "react-icons/bs";
+
 import AccountMenu from "@/components/AccountMenu";
+import MobileMenu from "@/components/MobileMenu";
+import NavBarItem from "@/components/NavBarItem";
 
 const TOP_OFFSET = 66;
 
 export default function NavBar() {
-    const [showMobileMenu, setShowMobileMenu] = useState(false);
-    const [showAccountMenu, setShowAccountMenu] = useState(false);
-    const [showBackground, setShowBackground] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
+  const [showBackground, setShowBackground] = useState(false);
 
-    const toggleMobileMenu = useCallback(() => {
-        setShowMobileMenu((current) => !current);
-    }, []);
+  const toggleMobileMenu = useCallback(() => {
+    setShowMobileMenu(current => !current);
+  }, []);
 
-    const toggleAccountMenu = useCallback(() => {
-        setShowAccountMenu((current) => !current);
-    }, []);
+  const toggleAccountMenu = useCallback(() => {
+    setShowAccountMenu(current => !current);
+  }, []);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY >= TOP_OFFSET) {
-                setShowBackground(true);
-            } else {
-                setShowBackground(false);
-            }
-        }
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= TOP_OFFSET) {
+        setShowBackground(true);
+      } else {
+        setShowBackground(false);
+      }
+    };
 
-        window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        }
-    }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-    return (
-        <nav className="w-full fixed z-40">
+  return (
+    <nav className="fixed z-40 w-full">
+      <div
+        className={`flex flex-row items-center px-4 py-6 transition duration-500 md:px-16 ${showBackground ? "bg-opacity/90 bg-zinc-900" : ""} `}
+      >
+        <Image src="/images/logo.png" alt="logo" width="150" height="50" priority />
 
-            <div className={`
-                px-4
-                md:px-16
-                py-6
-                flex
-                flex-row
-                items-center
-                transition
-                duration-500
-                ${showBackground ? 'bg-zinc-900 bg-opacity-90' : ''}
-            `}>
+        <div className="ml-8 hidden flex-row gap-7 lg:flex">
+          <NavBarItem label="Home" path="/" />
+          <NavBarItem label="Series" path="/shows" />
+          <NavBarItem label="Films" path="/movies" />
+          <NavBarItem label="New & Popular" path="/latest" />
+          <NavBarItem label="My List" path="/mylist" />
+          <NavBarItem label="Browse by languages" path="/browse" />
+        </div>
 
-                <Image
-                    src="/images/logo.png"
-                    alt="logo"
-                    width="150"
-                    height="50"
-                    priority
-                />
+        <button
+          type="button"
+          onClick={toggleMobileMenu}
+          className="relative ml-8 flex cursor-pointer flex-row items-center gap-2 lg:hidden"
+        >
+          <p className="text-sm text-white">Browse</p>
+          <BsChevronDown
+            className={`text-white transition ${showMobileMenu ? "rotate-180" : "rotate-0"}`}
+          />
+          <MobileMenu visible={showMobileMenu} />
+        </button>
 
-                <div className="flex-row ml-8 gap-7 hidden lg:flex">
-                    <NavBarItem label="Home" path={"/"}/>
-                    <NavBarItem label="Series" path={"/shows"}/>
-                    <NavBarItem label="Films" path={"/movies"}/>
-                    <NavBarItem label="New & Popular" path={"/latest"}/>
-                    <NavBarItem label="My List" path={"/mylist"}/>
-                    <NavBarItem label="Browse by languages" path={"/browse"}/>
-                </div>
+        <div className="ml-auto flex flex-row items-center gap-7">
+          <div className="cursor-pointer text-gray-200 transition hover:text-gray-300">
+            <BsSearch />
+          </div>
 
-                <div
-                    onClick={toggleMobileMenu}
-                    className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative">
-                    <p className="text-white text-sm">Browse</p>
-                    <BsChevronDown className={`text-white transition ${showMobileMenu ? 'rotate-180' : 'rotate-0'}`}/>
-                    <MobileMenu visible={showMobileMenu}/>
-                </div>
+          <div className="cursor-pointer text-gray-200 transition hover:text-gray-300">
+            <BsBell />
+          </div>
 
-                <div className="flex flex-row ml-auto gap-7 items-center">
-                    <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-                        <BsSearch/>
-                    </div>
-
-                    <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-                        <BsBell/>
-                    </div>
-
-                    <div
-                        onClick={toggleAccountMenu}
-                        className="flex flex-row items-center gap-2 cursor-pointer relative">
-                        <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
-                            <Image
-                                src="/images/profile.png"
-                                alt="avatar"
-                                width="100"
-                                height="100"
-                            />
-                        </div>
-                        <BsChevronDown
-                            className={`text-white transition ${showAccountMenu ? 'rotate-180' : 'rotate-0'}`}/>
-                        <AccountMenu visible={showAccountMenu}/>
-                    </div>
-                </div>
-
+          <button
+            type="button"
+            onClick={toggleAccountMenu}
+            className="relative flex cursor-pointer flex-row items-center gap-2"
+          >
+            <div className="size-6 overflow-hidden rounded-md lg:size-10">
+              <Image src="/images/profile.png" alt="avatar" width="100" height="100" />
             </div>
-        </nav>
-    )
+            <BsChevronDown
+              className={`text-white transition ${showAccountMenu ? "rotate-180" : "rotate-0"}`}
+            />
+            <AccountMenu visible={showAccountMenu} />
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
 }
