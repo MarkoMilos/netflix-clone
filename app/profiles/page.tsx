@@ -1,35 +1,41 @@
-"use client";
+import Link from "next/link";
+import { FaPlusCircle } from "react-icons/fa";
 
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-
-import useCurrentUser from "@/hooks/useCurrentUser";
+import ProfileItem from "@/components/ProfileItem";
+import getProfiles from "@/service/ProfileService";
 
 export default function Profiles() {
-  const { data: user } = useCurrentUser();
-  const router = useRouter();
+  const profiles = getProfiles();
 
   return (
     <div className="flex h-full items-center justify-center">
-      <div className="flex flex-col">
-        <h1 className="text-center text-3xl text-white md:text-6xl">Who is watching?</h1>
+      <div className="flex max-w-[80%] select-none flex-col items-center">
+        <h1 className="my-11 text-center text-[2rem] text-white lg:text-[3.5vw]">
+          Who&#39;s watching?
+        </h1>
 
-        <div className="mt-10 flex items-center justify-center gap-8">
-          <button
-            type="button"
-            onClick={() => {
-              router.push("/");
-            }}
-            className="group flex flex-col items-center"
-          >
-            <div className="flex size-44 items-center justify-center overflow-hidden rounded-md border-2 border-transparent group-hover:cursor-pointer group-hover:border-white">
-              <Image src="/images/profile.png" alt="profile" width={176} height={176} />
+        <div className="mb-8 flex items-center justify-center gap-8">
+          {profiles.map(profile => (
+            <ProfileItem key={profile.id} profile={profile} />
+          ))}
+
+          <Link href="/profiles/manage" className="group cursor-pointer">
+            <div className="relative size-[10vw] max-h-[200px] min-h-[90px] min-w-[90px] max-w-[200px] rounded-md bg-transparent p-2 hover:bg-active md:p-4 lg:p-6 xl:p-10">
+              <FaPlusCircle className="size-full text-normal" />
             </div>
-            <div className="mt-4 text-center text-2xl text-gray-400 group-hover:text-white">
-              {user?.name}
-            </div>
-          </button>
+
+            <p className="my-[0.6em] text-center text-[12px] text-normal group-hover:text-active md:text-[1.3vw] 2xl:text-[24px]">
+              Add Profile
+            </p>
+          </Link>
         </div>
+
+        <Link
+          href="/profiles/manage"
+          className="mb-4 mt-8 cursor-pointer border border-normal px-[1.5em] py-[0.4em] text-[12px] tracking-widest text-normal hover:border-active hover:text-active md:text-[1.2vw]"
+        >
+          Manage Profiles
+        </Link>
       </div>
     </div>
   );

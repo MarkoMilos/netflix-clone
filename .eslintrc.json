@@ -34,6 +34,7 @@
     ],
     "jsx-a11y/media-has-captionjsx-a11y/media-has-caption": "off",
     "tailwindcss/no-custom-classname": "off",
+    "tailwindcss/classnames-order": "off",
     "import/no-unresolved": "error",
     "import/extensions": "off",
     "import/order": [

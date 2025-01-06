@@ -2,8 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --background: rgb(20, 20, 20);
+    --foreground: rgb(255, 255, 255);
+    --color-normal: rgb(129, 129, 129);
+    --color-active: rgb(229, 229, 229);
+}
+
+@font-face {
+    font-family: 'netflix-sans';
+    src: url('/public/fonts/NetflixSans-Light.otf') format('opentype');
+    font-weight: 300; /* Light */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'netflix-sans';
+    src: url('/public/fonts/NetflixSans-Regular.otf') format('opentype');
+    font-weight: 400; /* Regular */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'netflix-sans';
+    src: url('/public/fonts/NetflixSans-Medium.otf') format('opentype');
+    font-weight: 500; /* Medium */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'netflix-sans';
+    src: url('/public/fonts/NetflixSans-Bold.otf') format('opentype');
+    font-weight: 700; /* Bold */
+    font-style: normal;
+}
+
 body {
-    @apply bg-zinc-900 h-full overflow-x-hidden
+    @apply bg-background h-full overflow-x-hidden;
+    font-family: 'netflix-sans', sans-serif;
+    font-weight: 400; /* Set Regular as default */
 }
 
 html {

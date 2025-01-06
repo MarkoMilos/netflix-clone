@@ -9,6 +9,12 @@ export type User = {
   favouriteIds: string[];
 };
 
+export type Profile = {
+  id: string;
+  name: string;
+  image: string;
+};
+
 export type Movie = {
   id: string;
   title: string;
