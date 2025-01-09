@@ -10,14 +10,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xmd: "900px",
+      },
       fontFamily: {
-        sans: ["netflix-sans", ...fontFamily.sans],
+        sans: ["var(--font-netflix-sans)", ...fontFamily.sans],
       },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        normal: "var(--color-normal)",
-        active: "var(--color-active)",
+        gray129: "var(--color-gray-129)",
+        gray179: "var(--color-gray-179)",
+        gray229: "var(--color-gray-229)",
       },
     },
   },

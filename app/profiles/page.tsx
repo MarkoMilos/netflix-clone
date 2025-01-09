@@ -20,11 +20,11 @@ export default function Profiles() {
           ))}
 
           <Link href="/profiles/manage" className="group cursor-pointer">
-            <div className="relative size-[10vw] max-h-[200px] min-h-[90px] min-w-[90px] max-w-[200px] rounded-md bg-transparent p-2 hover:bg-active md:p-4 lg:p-6 xl:p-10">
-              <FaPlusCircle className="size-full text-normal" />
+            <div className="relative size-[10vw] max-h-[200px] min-h-[90px] min-w-[90px] max-w-[200px] rounded-md bg-transparent p-2 hover:bg-gray229 md:p-4 lg:p-6 xl:p-10">
+              <FaPlusCircle className="size-full text-gray129" />
             </div>
 
-            <p className="my-[0.6em] text-center text-[12px] text-normal group-hover:text-active md:text-[1.3vw] 2xl:text-[24px]">
+            <p className="my-[0.6em] text-center text-[12px] text-gray129 group-hover:text-gray229 md:text-[1.3vw] 2xl:text-[24px]">
               Add Profile
             </p>
           </Link>
@@ -32,7 +32,7 @@ export default function Profiles() {
 
         <Link
           href="/profiles/manage"
-          className="mb-4 mt-8 cursor-pointer border border-normal px-[1.5em] py-[0.4em] text-[12px] tracking-widest text-normal hover:border-active hover:text-active md:text-[1.2vw]"
+          className="mb-4 mt-8 cursor-pointer border border-gray129 px-[1.5em] py-[0.4em] text-[12px] font-light tracking-widest text-gray129 hover:border-gray229 hover:text-gray229 md:text-[1.2vw]"
         >
           Manage Profiles
         </Link>

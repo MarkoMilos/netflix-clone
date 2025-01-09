@@ -1,20 +1,49 @@
+import clsx from "clsx";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { GoTriangleUp } from "react-icons/go";
+
 interface MobileMenuProps {
   visible?: boolean;
 }
 
+const links = [
+  { label: "Home", path: "/" },
+  { label: "Series", path: "/shows" },
+  { label: "Films", path: "/movies" },
+  { label: "New & Popular", path: "/latest" },
+  { label: "My List", path: "/mylist" },
+  { label: "Browse by languages", path: "/browse" },
+];
+
 export default function MobileMenu({ visible = false }: MobileMenuProps) {
+  const pathname = usePathname();
+
   if (!visible) return null;
 
   return (
-    <div className="absolute left-0 top-8 flex w-56 flex-col border-2 border-gray-500 bg-black py-5">
-      <div className="flex flex-col gap-4">
-        <div className="px-3 text-center text-white hover:underline">Home</div>
-        <div className="px-3 text-center text-white hover:underline">Series</div>
-        <div className="px-3 text-center text-white hover:underline">Films</div>
-        <div className="px-3 text-center text-white hover:underline">New & Popular</div>
-        <div className="px-3 text-center text-white hover:underline">My List</div>
-        <div className="px-3 text-center text-white hover:underline">Browse by languages</div>
+    <div className="absolute top-12 ml-[-90px] flex w-[260px] flex-col border border-white/15 bg-black/90">
+      <div className="absolute top-[-12px] flex w-full items-center justify-center text-gray229">
+        <GoTriangleUp />
       </div>
+
+      <div className="absolute top-[-2px] h-[2px] w-full bg-gray229" />
+
+      {links.map(({ label, path }) => (
+        <Link
+          key={path}
+          href={path}
+          className={clsx(
+            "flex h-[50px] w-full items-center justify-center text-[13px] hover:bg-white/5",
+            {
+              "font-bold text-white": pathname === path,
+              "text-gray179": pathname !== path,
+            },
+          )}
+        >
+          {label}
+        </Link>
+      ))}
     </div>
   );
 }

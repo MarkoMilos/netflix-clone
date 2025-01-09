@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { BsBell, BsChevronDown, BsSearch } from "react-icons/bs";
 
@@ -31,22 +32,29 @@ export default function NavBar() {
         setShowBackground(false);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <nav className="fixed z-40 w-full">
+    <nav className="fixed z-40 h-auto min-h-[70px] w-full">
       <div
-        className={`flex flex-row items-center px-4 py-6 transition duration-500 md:px-16 ${showBackground ? "bg-opacity/90 bg-zinc-900" : ""} `}
+        className={`flex h-[41px] flex-row items-center bg-[linear-gradient(180deg,rgba(0,0,0,0.7)_10%,transparent)] px-[4%] transition duration-500 lg:h-[68px] xl:px-[60px] ${showBackground ? "bg-opacity/90 bg-zinc-900" : ""} `}
       >
-        <Image src="/images/logo.png" alt="logo" width="150" height="50" priority />
+        <Link href="/" className="mr-[5px] cursor-pointer lg:mr-[25px]">
+          <Image
+            src="/images/logo.png"
+            alt="logo"
+            width={90}
+            height={30}
+            priority
+            className="w-[40px] sm:w-[50px] md:w-[70px] lg:w-[90px]"
+          />
+        </Link>
 
-        <div className="ml-8 hidden flex-row gap-7 lg:flex">
+        <div className="hidden flex-row gap-[18px] pl-[18px] xmd:flex xl:gap-[20px] xl:pl-[20px]">
           <NavBarItem label="Home" path="/" />
           <NavBarItem label="Series" path="/shows" />
           <NavBarItem label="Films" path="/movies" />
@@ -58,21 +66,21 @@ export default function NavBar() {
         <button
           type="button"
           onClick={toggleMobileMenu}
-          className="relative ml-8 flex cursor-pointer flex-row items-center gap-2 lg:hidden"
+          className="relative ml-[18px] flex cursor-pointer flex-row items-center gap-[5px] xmd:hidden"
         >
-          <p className="text-sm text-white">Browse</p>
+          <p className="text-[0.7rem] text-white">Browse</p>
           <BsChevronDown
-            className={`text-white transition ${showMobileMenu ? "rotate-180" : "rotate-0"}`}
+            className={`size-[10px] text-white transition ${showMobileMenu ? "rotate-180" : "rotate-0"}`}
           />
           <MobileMenu visible={showMobileMenu} />
         </button>
 
-        <div className="ml-auto flex flex-row items-center gap-7">
-          <div className="cursor-pointer text-gray-200 transition hover:text-gray-300">
+        <div className="ml-auto flex flex-row items-center gap-6">
+          <div className="size-6 cursor-pointer text-white transition hover:text-gray179">
             <BsSearch />
           </div>
 
-          <div className="cursor-pointer text-gray-200 transition hover:text-gray-300">
+          <div className="size-6 cursor-pointer text-white transition hover:text-gray179">
             <BsBell />
           </div>
 
@@ -81,9 +89,13 @@ export default function NavBar() {
             onClick={toggleAccountMenu}
             className="relative flex cursor-pointer flex-row items-center gap-2"
           >
-            <div className="size-6 overflow-hidden rounded-md lg:size-10">
-              <Image src="/images/profile.png" alt="avatar" width="100" height="100" />
-            </div>
+            <Image
+              src="/images/profile1.png"
+              alt="avatar"
+              width={32}
+              height={32}
+              className="size-8 rounded-md"
+            />
             <BsChevronDown
               className={`text-white transition ${showAccountMenu ? "rotate-180" : "rotate-0"}`}
             />
