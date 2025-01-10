@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 
@@ -8,18 +9,16 @@ import useCurrentProfile from "@/hooks/useCurrentProfile";
 import useProfiles from "@/hooks/useProfiles";
 
 interface AccountMenuProps {
-  visible: boolean;
+  className?: string;
 }
 
-export default function AccountMenu({ visible }: AccountMenuProps) {
+export default function AccountMenu({ className = "" }: AccountMenuProps) {
   const { data: profiles } = useProfiles();
   const { data: currentProfile } = useCurrentProfile();
   const otherProfiles = profiles?.filter(profile => profile.id !== currentProfile?.id);
 
-  if (!visible) return null;
-
   return (
-    <div className="absolute right-0 top-12 flex w-[220px] flex-col border border-white/15 bg-black/90">
+    <div className={clsx("flex w-[220px] flex-col border border-white/15 bg-black/90", className)}>
       <div className="w-full pb-[5px] pt-[10px]">
         {otherProfiles?.map(profile => (
           <div

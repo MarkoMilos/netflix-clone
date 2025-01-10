@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { GoTriangleUp } from "react-icons/go";
 
 interface MobileMenuProps {
-  visible?: boolean;
+  className?: string;
 }
 
 const links = [
@@ -16,13 +16,16 @@ const links = [
   { label: "Browse by languages", path: "/browse" },
 ];
 
-export default function MobileMenu({ visible = false }: MobileMenuProps) {
+export default function MobileMenu({ className = "" }: MobileMenuProps) {
   const pathname = usePathname();
 
-  if (!visible) return null;
-
   return (
-    <div className="absolute top-12 ml-[-90px] flex w-[260px] flex-col border border-white/15 bg-black/90">
+    <div
+      className={clsx(
+        "relative flex w-[260px] flex-col border border-white/15 bg-black/90",
+        className,
+      )}
+    >
       <div className="absolute top-[-12px] flex w-full items-center justify-center text-gray229">
         <GoTriangleUp />
       </div>
