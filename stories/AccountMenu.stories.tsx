@@ -5,19 +5,31 @@ import AccountMenu from "@/components/AccountMenu";
 const meta: Meta<typeof AccountMenu> = {
   title: "Components/AccountMenu",
   component: AccountMenu,
-  parameters: {
-    docs: {
-      story: {
-        height: "300px",
-      },
-    },
-  },
   tags: ["autodocs"],
   argTypes: {
-    visible: { control: "boolean" },
+    profiles: { control: "object" },
+    currentProfile: { control: "object" },
+    className: { control: "text" },
   },
   args: {
-    visible: true,
+    profiles: [
+      {
+        id: "1",
+        name: "John Doe",
+        image: "/images/profile1.png",
+      },
+      {
+        id: "2",
+        name: "Kids",
+        image: "/images/profile-kids.png",
+      },
+    ],
+    currentProfile: {
+      id: "1",
+      name: "John Doe",
+      image: "/images/profile1.png",
+    },
+    className: "",
   },
 };
 

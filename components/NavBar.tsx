@@ -1,36 +1,21 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { BsBell, BsChevronDown, BsSearch } from "react-icons/bs";
 
 import AccountMenu from "@/components/AccountMenu";
 import MobileMenu from "@/components/MobileMenu";
+import NavBarBackground from "@/components/NavBarBackground";
 import NavBarItem from "@/components/NavBarItem";
+import profileService from "@/service/ProfileService";
 
-const TOP_OFFSET = 66;
-
-export default function NavBar() {
-  const [showBackground, setShowBackground] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowBackground(window.scrollY >= TOP_OFFSET);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+export default async function NavBar() {
+  const profiles = await profileService.getProfiles();
+  const currentProfile = await profileService.getCurrentProfile();
 
   return (
     <nav className="fixed z-40 h-auto min-h-[70px] w-full">
-      <div
-        className={`flex h-[41px] flex-row items-center bg-[linear-gradient(180deg,rgba(0,0,0,0.7)_10%,transparent)] px-[4%] transition duration-500 lg:h-[68px] xl:px-[60px] ${
-          showBackground ? "bg-opacity/90 bg-zinc-900" : ""
-        }`}
-      >
+      <NavBarBackground />
+      <div className="flex h-[41px] flex-row items-center px-[4%] transition duration-500 lg:h-[68px] xl:px-[60px]">
         <Link href="/" className="mr-[5px] cursor-pointer lg:mr-[25px]">
           <Image
             src="/images/logo.png"
@@ -78,7 +63,7 @@ export default function NavBar() {
             />
             <BsChevronDown className="rotate-0 text-white transition group-hover/menu:rotate-180" />
             <div className="absolute right-0 top-0 hidden pt-12 group-hover/menu:block">
-              <AccountMenu />
+              <AccountMenu currentProfile={currentProfile} profiles={profiles} />
             </div>
           </div>
         </div>

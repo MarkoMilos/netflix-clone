@@ -5,17 +5,20 @@ import Image from "next/image";
 import { signOut } from "next-auth/react";
 
 import Icon from "@/components/Icons";
-import useCurrentProfile from "@/hooks/useCurrentProfile";
-import useProfiles from "@/hooks/useProfiles";
+import { Profile } from "@/types";
 
 interface AccountMenuProps {
+  profiles: Profile[];
+  currentProfile: Profile;
   className?: string;
 }
 
-export default function AccountMenu({ className = "" }: AccountMenuProps) {
-  const { data: profiles } = useProfiles();
-  const { data: currentProfile } = useCurrentProfile();
-  const otherProfiles = profiles?.filter(profile => profile.id !== currentProfile?.id);
+export default function AccountMenu({
+  profiles,
+  currentProfile,
+  className = "",
+}: AccountMenuProps) {
+  const otherProfiles = profiles.filter(profile => profile.id !== currentProfile.id);
 
   return (
     <div className={clsx("flex w-[220px] flex-col border border-white/15 bg-black/90", className)}>

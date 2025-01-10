@@ -2,10 +2,10 @@ import Link from "next/link";
 import { FaPlusCircle } from "react-icons/fa";
 
 import ProfileItem from "@/components/ProfileItem";
-import getProfiles from "@/service/ProfileService";
+import profileService from "@/service/ProfileService";
 
-export default function Profiles() {
-  const profiles = getProfiles();
+export default async function Profiles() {
+  const profiles = await profileService.getProfiles();
 
   return (
     <div className="flex h-full items-center justify-center">

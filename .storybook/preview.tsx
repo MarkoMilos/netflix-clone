@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react";
 
 import "../app/globals.css";
+import netflixSans from "../lib/fonts";
 
 const preview: Preview = {
   parameters: {
@@ -11,6 +12,13 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    Story => (
+      <div className={`${netflixSans.variable} font-sans antialiased`}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default preview;

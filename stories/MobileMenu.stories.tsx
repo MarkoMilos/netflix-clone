@@ -14,10 +14,10 @@ const meta: Meta<typeof MobileMenu> = {
   },
   tags: ["autodocs"],
   argTypes: {
-    visible: { control: "boolean" },
+    className: { control: "text" },
   },
   args: {
-    visible: true,
+    className: "",
   },
 };
 
