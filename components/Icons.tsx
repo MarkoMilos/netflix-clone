@@ -1,14 +1,22 @@
 import React from "react";
 
 import AccountIcon from "@/assets/icons/account.svg";
+import BellIcon from "@/assets/icons/bell.svg";
 import EditIcon from "@/assets/icons/edit.svg";
 import HelpIcon from "@/assets/icons/help.svg";
+import InfoIcon from "@/assets/icons/info.svg";
+import PlayIcon from "@/assets/icons/play.svg";
+import SearchIcon from "@/assets/icons/search.svg";
 import TransferIcon from "@/assets/icons/transfer.svg";
 
 const iconMap = {
   account: AccountIcon,
+  bell: BellIcon,
   edit: EditIcon,
   help: HelpIcon,
+  info: InfoIcon,
+  play: PlayIcon,
+  search: SearchIcon,
   transfer: TransferIcon,
 };
 

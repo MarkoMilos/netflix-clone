@@ -14,7 +14,7 @@ export default function NavBarItem({ label, path }: NavBarItemProps) {
 
   return (
     <div
-      className={`duration-400 cursor-pointer text-[0.8rem] transition ease-in xl:text-[14px] ${
+      className={`duration-400 cursor-pointer text-[1.2rem] transition ease-in xl:text-[14px] ${
         isActive ? "font-bold text-white" : "font-light text-white hover:text-gray179"
       }`}
     >

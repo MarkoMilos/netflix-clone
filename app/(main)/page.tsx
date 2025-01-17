@@ -16,8 +16,10 @@ export default async function HomePage() {
     <>
       <InfoModal />
 
-      <div className="relative w-full pb-[40%]">
-        <Billboard data={billboardMovie} />
+      <div className="relative mb-[20px] w-full pb-[40%]">
+        <div className="absolute h-[56.25vw] w-full">
+          <Billboard data={billboardMovie} />
+        </div>
       </div>
 
       <div className="pb-40">

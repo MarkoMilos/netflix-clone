@@ -1,21 +1,19 @@
-import { useRouter } from "next/navigation";
-import { BsFillPlayFill } from "react-icons/bs";
+import Link from "next/link";
+
+import Icon from "@/components/Icons";
 
 interface PlayButtonProps {
   movieId: string;
 }
 
 export default function PlayButton({ movieId }: PlayButtonProps) {
-  const router = useRouter();
-
   return (
-    <button
-      type="button"
-      onClick={() => router.push(`/watch/${movieId}`)}
-      className="flex w-auto flex-row items-center rounded-md bg-white/30 px-2 py-1 text-xs font-semibold text-white transition hover:bg-white/20 md:px-4 md:py-2 lg:text-lg"
+    <Link
+      href={`/watch/${movieId}`}
+      className="flex cursor-pointer flex-row items-center gap-4 rounded-[4px] bg-white py-[0.8rem] pl-8 pr-[2.4rem] hover:bg-white/75"
     >
-      <BsFillPlayFill size={25} className="mr-1" />
-      Play
-    </button>
+      <Icon name="play" className="size-[2.4rem]" />
+      <span className="select-none text-[1.6rem] font-medium text-black">Play</span>
+    </Link>
   );
 }

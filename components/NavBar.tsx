@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BsBell, BsChevronDown, BsSearch } from "react-icons/bs";
+import { BsChevronDown } from "react-icons/bs";
 
 import AccountMenu from "@/components/AccountMenu";
+import Icon from "@/components/Icons";
 import MobileMenu from "@/components/MobileMenu";
 import NavBarBackground from "@/components/NavBarBackground";
 import NavBarItem from "@/components/NavBarItem";
@@ -37,21 +38,17 @@ export default async function NavBar() {
         </div>
 
         <div className="group relative ml-[18px] flex cursor-pointer flex-row items-center gap-[5px] xmd:hidden">
-          <p className="text-[0.7rem] font-medium text-white">Browse</p>
+          <p className="text-[1.2rem] font-medium text-white">Browse</p>
           <BsChevronDown className="size-[10px] rotate-0 text-white transition group-hover:rotate-180" />
-          <div className="absolute left-0 top-0 ml-[-90px] hidden pt-12 group-hover:block">
+          <div className="absolute left-0 top-0 ml-[-90px] hidden pt-24 group-hover:block">
             <MobileMenu />
           </div>
         </div>
 
         <div className="ml-auto flex flex-row items-center gap-6">
-          <div className="size-6 cursor-pointer text-white transition hover:text-gray179">
-            <BsSearch />
-          </div>
+          <Icon name="search" className="size-[24px] cursor-pointer text-white" />
 
-          <div className="size-6 cursor-pointer text-white transition hover:text-gray179">
-            <BsBell />
-          </div>
+          <Icon name="bell" className="size-[24px] cursor-pointer text-white" />
 
           <div className="group/menu relative flex cursor-pointer flex-row items-center gap-2">
             <Image
@@ -59,10 +56,10 @@ export default async function NavBar() {
               alt="avatar"
               width={32}
               height={32}
-              className="size-8 rounded-md"
+              className="rounded-[4px]"
             />
-            <BsChevronDown className="rotate-0 text-white transition group-hover/menu:rotate-180" />
-            <div className="absolute right-0 top-0 hidden pt-12 group-hover/menu:block">
+            <BsChevronDown className="hidden rotate-0 text-white transition group-hover/menu:rotate-180 md:inline-block" />
+            <div className="absolute right-0 top-0 hidden pt-[52px] group-hover/menu:block">
               <AccountMenu currentProfile={currentProfile} profiles={profiles} />
             </div>
           </div>

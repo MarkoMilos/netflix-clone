@@ -28,8 +28,8 @@ export default function MobileMenu({ className = "" }: MobileMenuProps) {
         className,
       )}
     >
-      <div className="absolute top-[-12px] flex w-full items-center justify-center text-gray229">
-        <GoTriangleUp />
+      <div className="absolute top-[-16px] flex w-full items-center justify-center text-gray229">
+        <GoTriangleUp size={22} />
       </div>
 
       <div className="absolute top-[-2px] h-[2px] w-full bg-gray229" />
