@@ -1,28 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import styles from "./NetflixCarousel.module.css";
+import styles from "./ContentCarousel.module.css";
 import Icon from "@/components/Icons";
 import { ResponsiveValue, useResponsiveValue } from "@/hooks/useResponsiveValue";
 
-const data = [
-  "https://placehold.co/350x200?text=1",
-  "https://placehold.co/350x200?text=2",
-  "https://placehold.co/350x200?text=3",
-  "https://placehold.co/350x200?text=4",
-  "https://placehold.co/350x200?text=5",
-  "https://placehold.co/350x200?text=6",
-  "https://placehold.co/350x200?text=7",
-  "https://placehold.co/350x200?text=8",
-  "https://placehold.co/350x200?text=9",
-  "https://placehold.co/350x200?text=10",
-  "https://placehold.co/350x200?text=11",
-  "https://placehold.co/350x200?text=12",
-  "https://placehold.co/350x200?text=13",
-  "https://placehold.co/350x200?text=14",
-  "https://placehold.co/350x200?text=15",
-];
+type ContentItem = {
+  contentId: string;
+  contentPosterImage: string;
+};
 
 type SlideDirection = "next" | "previous";
 
@@ -43,7 +31,7 @@ const CAROUSEL_RESPONSIVE_CONFIG: ResponsiveValue<number> = {
   xl: 6, // >= 1400px: 6 items
 };
 
-export default function NetflixCarousel() {
+export default function ContentCarousel({ title, data }: { title: string; data: ContentItem[] }) {
   const [firstVisibleItemIndex, setFirstVisibleItemIndex] = useState(0); // Index of the first fully visible item
   const [isCircular, setIsCircular] = useState(false); // Tracks if the carousel is in circular mode
   const [animationState, setAnimationState] = useState<AnimationState>({
@@ -109,7 +97,7 @@ export default function NetflixCarousel() {
       items.push(data[(startIndex + i) % data.length]);
     }
     return items;
-  }, [isCircular, firstVisibleItemIndex, visibleItems]);
+  }, [isCircular, firstVisibleItemIndex, visibleItems, data]);
 
   const slide = useCallback(
     (direction: SlideDirection) => {
@@ -127,7 +115,7 @@ export default function NetflixCarousel() {
         if (!isCircular) setIsCircular(true);
       }, ANIMATION_DURATION);
     },
-    [animationState, isCircular, visibleItems],
+    [animationState, isCircular, visibleItems, data],
   );
 
   const handlePrevious = useCallback((): void => slide("previous"), [slide]);
@@ -142,45 +130,55 @@ export default function NetflixCarousel() {
 
   return (
     <div className={styles.container}>
-      <button
-        className={`${styles.handleLeft} ${!isCircular ? styles.hidden : ""}`}
-        onClick={handlePrevious}
-        type="button"
-        aria-label="See previous titles"
-      >
-        <Icon name="chevron" className={styles.handleIcon} />
-      </button>
+      <div className={styles.headerContainer}>
+        <Link className={styles.headerLink} href="/content">
+          <div className={styles.headerTitle}>{title}</div>
+          <div className={styles.headerMore}>Explore All</div>
+          <Icon name="chevron" className={styles.headerIcon} />
+        </Link>
+      </div>
 
-      <button
-        className={styles.handleRight}
-        onClick={handleNext}
-        type="button"
-        aria-label="See more titles"
-      >
-        <Icon name="chevron" className={styles.handleIcon} />
-      </button>
-
-      <div className={styles.slider}>
-        <div
-          className={styles.sliderContent}
-          style={{
-            transform: `translateX(${translation}%)`,
-            transition: animationState.isSliding
-              ? `transform ${ANIMATION_DURATION}ms ease-in-out`
-              : "none",
-          }}
+      <div className={styles.sliderContainer}>
+        <button
+          className={`${styles.handleLeft} ${!isCircular ? styles.hidden : ""}`}
+          onClick={handlePrevious}
+          type="button"
+          aria-label="See previous titles"
         >
-          {contentItems.map((item, index) => (
-            <div
-              // eslint-disable-next-line react/no-array-index-key
-              key={`${item}-${index}-${firstVisibleItemIndex}`}
-              className={styles.item}
-              style={{ width: `${itemWidth}%` }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={item} alt={`Item ${index}`} />
-            </div>
-          ))}
+          <Icon name="chevron" className={styles.handleIcon} />
+        </button>
+
+        <button
+          className={styles.handleRight}
+          onClick={handleNext}
+          type="button"
+          aria-label="See more titles"
+        >
+          <Icon name="chevron" className={styles.handleIcon} />
+        </button>
+
+        <div className={styles.slider}>
+          <div
+            className={styles.sliderContent}
+            style={{
+              transform: `translateX(${translation}%)`,
+              transition: animationState.isSliding
+                ? `transform ${ANIMATION_DURATION}ms ease-in-out`
+                : "none",
+            }}
+          >
+            {contentItems.map((item, index) => (
+              <div
+                // eslint-disable-next-line react/no-array-index-key
+                key={`${item}-${index}-${firstVisibleItemIndex}`}
+                className={styles.item}
+                style={{ width: `${itemWidth}%` }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={item.contentPosterImage} alt={`Item ${index}`} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

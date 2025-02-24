@@ -2,6 +2,82 @@
   position: relative;
 }
 
+.headerContainer {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.25vw;
+  padding: 0.3em 4% 0.6em;
+}
+
+@media (min-width: 800px) {
+  .headerContainer {
+    font-size: 1.4vw;
+  }
+}
+
+@media (min-width: 1500px) {
+  .headerContainer {
+    padding: 0.3em 60px 0.6em;
+  }
+}
+
+.headerLink {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: end;
+}
+
+.headerTitle {
+  color: white;
+  vertical-align: bottom;
+}
+
+.headerMore {
+  color: #54b9c5;
+  font-size: 0.9vw;
+  line-height: 0.8vw;
+  vertical-align: bottom;
+  margin-right: 2px;
+  opacity: 0;
+  max-width: 0;
+  white-space: nowrap;
+  transition:
+    opacity 1s ease-in-out,
+    max-width 1s ease-in-out,
+    transform 0.75s ease-in-out;
+}
+
+.headerLink:hover .headerMore {
+  opacity: 1;
+  max-width: 200px;
+  transform: translateX(1vw);
+}
+
+.headerIcon {
+  width: 0.95vw;
+  height: 0.95vw;
+  color: #54b9c5;
+  transform: rotate(-90deg);
+  opacity: 0;
+  transition: 
+    opacity 0.2s ease-in-out,
+    transform 0.75s ease-in-out;
+}
+
+.container:hover .headerIcon {
+  opacity: 1;
+}
+
+.headerLink:hover .headerIcon {
+  width: 0.75vw;
+  height: 0.75vw;
+  transform: rotate(-90deg) translateY(1vw);
+}
+
+.sliderContainer {
+  position: relative;
+}
+
 .slider {
   padding: 0 4%;
 }
@@ -70,7 +146,7 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.container:hover .handleIcon,
+.sliderContainer:hover .handleIcon,
 .handle:hover .handleIcon {
   opacity: 1;
 }
