@@ -1,16 +1,12 @@
 import Billboard from "@/components/Billboard";
-import FavouriteList from "@/components/FavouriteList";
 import InfoModal from "@/components/InfoModal";
-import MovieList from "@/components/MovieList";
-import { authUser } from "@/lib/auth/session";
-import movieRepository from "@/repository/MovieRepository";
-import movieService from "@/service/MovieService";
+import ContentCarousel from "@/components/ContentCarousel";
+import contentService from "@/service/ContentService";
+import TMDBService from "@/service/TMDBService";
 
 export default async function HomePage() {
-  const user = await authUser();
-  const billboardMovie = await movieService.getRandomMovie();
-  const movies = (await movieRepository.getAll()) ?? [];
-  const favourites = (await movieRepository.getByIds(user ? user.favouriteIds : [])) ?? [];
+  const billboardMovie = await contentService.getRandomTrendingMovie();
+  const trendingMovies = await TMDBService.getTrendingMovies();
 
   return (
     <>
@@ -22,9 +18,8 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <div className="pb-40">
-        <MovieList movies={movies} title="Trending Now" />
-        <FavouriteList movies={favourites} title="My List" />
+      <div className="relative pb-40">
+        <ContentCarousel title="Trending" movies={trendingMovies} />
       </div>
     </>
   );

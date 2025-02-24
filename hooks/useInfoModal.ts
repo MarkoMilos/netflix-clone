@@ -4,7 +4,7 @@ import { devtools } from "zustand/middleware";
 export interface ModalStoreInterface {
   movieId?: string;
   isOpen: boolean;
-  openModal: (movieId: string) => void;
+  openModal: (movieId: number) => void;
   closeModal: () => void;
 }
 

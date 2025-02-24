@@ -1,6 +1,6 @@
 "use client";
 
-import MovieList from "@/components/MovieList";
+import ContentCarousel from "@/components/ContentCarousel";
 import useFavourites from "@/hooks/useFavourites";
 import { Movie } from "@/types";
 
@@ -14,5 +14,5 @@ export default function FavouriteList({ movies, title }: FavouriteListProps) {
   if (!data) {
     return null;
   }
-  return <MovieList movies={data} title={title} />;
+  return <ContentCarousel movies={data} title={title} />;
 }

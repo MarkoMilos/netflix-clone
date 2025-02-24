@@ -2,6 +2,7 @@ import React from "react";
 
 import AccountIcon from "@/assets/icons/account.svg";
 import BellIcon from "@/assets/icons/bell.svg";
+import ChevronIcon from "@/assets/icons/chevron.svg";
 import EditIcon from "@/assets/icons/edit.svg";
 import HelpIcon from "@/assets/icons/help.svg";
 import InfoIcon from "@/assets/icons/info.svg";
@@ -12,6 +13,7 @@ import TransferIcon from "@/assets/icons/transfer.svg";
 const iconMap = {
   account: AccountIcon,
   bell: BellIcon,
+  chevron: ChevronIcon,
   edit: EditIcon,
   help: HelpIcon,
   info: InfoIcon,

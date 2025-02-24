@@ -3,11 +3,11 @@ import React from "react";
 import Billboard from "@/components/Billboard";
 import MovieGrid from "@/components/MovieGrid/MovieGrid";
 import movieRepository from "@/repository/MovieRepository";
-import movieService from "@/service/MovieService";
+import contentService from "@/service/ContentService";
 
 export default async function MoviesPage() {
   const movies = (await movieRepository.getAll()) ?? [];
-  const billboardMovie = await movieService.getRandomMovie();
+  const billboardMovie = await contentService.getRandomTrendingMovie();
 
   return (
     <>

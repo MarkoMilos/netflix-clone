@@ -3,7 +3,7 @@ import Link from "next/link";
 import Icon from "@/components/Icons";
 
 interface PlayButtonProps {
-  movieId: string;
+  movieId: number;
 }
 
 export default function PlayButton({ movieId }: PlayButtonProps) {
