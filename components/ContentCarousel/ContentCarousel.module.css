@@ -59,7 +59,7 @@
   color: #54b9c5;
   transform: rotate(-90deg);
   opacity: 0;
-  transition: 
+  transition:
     opacity 0.2s ease-in-out,
     transform 0.75s ease-in-out;
 }
@@ -112,6 +112,25 @@
   border-radius: 0.2vw;
   object-fit: cover;
   object-position: center;
+}
+
+.itemTitleOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 50px 8px 5px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+}
+
+.itemTitle {
+  color: white;
+  font-size: 0.75vw;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 .handle {

@@ -7,8 +7,9 @@ import styles from "./ContentCarousel.module.css";
 import Icon from "@/components/Icons";
 import { ResponsiveValue, useResponsiveValue } from "@/hooks/useResponsiveValue";
 
-type ContentItem = {
-  contentId: string;
+export type ContentItem = {
+  contentId: number;
+  contentTitle: string;
   contentPosterImage: string;
 };
 
@@ -175,7 +176,10 @@ export default function ContentCarousel({ title, data }: { title: string; data: 
                 style={{ width: `${itemWidth}%` }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.contentPosterImage} alt={`Item ${index}`} />
+                <img src={item.contentPosterImage} alt={item.contentTitle} />
+                <div className={styles.itemTitleOverlay}>
+                  <div className={styles.itemTitle}>{item.contentTitle}</div>
+                </div>
               </div>
             ))}
           </div>
