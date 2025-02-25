@@ -4,14 +4,10 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import styles from "./ContentCarousel.module.css";
+import ContentCard from "@/components/ContentCard/ContentCard";
 import Icon from "@/components/Icons";
 import { ResponsiveValue, useResponsiveValue } from "@/hooks/useResponsiveValue";
-
-export type ContentItem = {
-  contentId: number;
-  contentTitle: string;
-  contentPosterImage: string;
-};
+import { ContentItem } from "@/types";
 
 type SlideDirection = "next" | "previous";
 
@@ -171,13 +167,11 @@ export default function ContentCarousel({ title, data }: { title: string; data: 
             {contentItems.map((item, index) => (
               <div
                 // eslint-disable-next-line react/no-array-index-key
-                key={`${item}-${index}-${firstVisibleItemIndex}`}
+                key={`${item.contentId}-${index}-${firstVisibleItemIndex}`}
                 className={styles.item}
                 style={{ width: `${itemWidth}%` }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.contentPosterImage} alt={item.contentTitle} />
-                <div className={styles.itemTitle}>{item.contentTitle}</div>
+                <ContentCard item={item} />
               </div>
             ))}
           </div>

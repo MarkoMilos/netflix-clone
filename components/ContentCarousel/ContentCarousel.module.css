@@ -1,5 +1,10 @@
 .container {
   position: relative;
+  z-index: 1;
+}
+
+.container:hover {
+  z-index: 10;
 }
 
 .headerContainer {
@@ -98,7 +103,7 @@
   width: 33.3333%;
   aspect-ratio: 16 / 9;
   padding: 0 0.2vw;
-  overflow: hidden;
+  overflow: visible;
   cursor: pointer;
 }
 

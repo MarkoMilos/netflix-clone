@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import ContentCard from "@/components/ContentCard";
+import ContentCard from "@/components/ContentCard/ContentCard";
 
 const meta: Meta<typeof ContentCard> = {
   title: "Components/ContentCard",
@@ -8,27 +8,22 @@ const meta: Meta<typeof ContentCard> = {
   parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
   argTypes: {
-    movie: { control: "object" },
+    item: { control: "object" },
   },
   args: {
-    movie: {
-      id: "6734be98105f60429ddc2574",
-      title: "We Are Going On Bullrun",
-      description:
-        "The Smoking Tire is going on the 2010 Bullrun Live Rally in a 2011 Shelby GT500, and posting a video from the road every single day!",
-      videoUrl:
-        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
-      thumbnailUrl:
-        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/WeAreGoingOnBullrun.jpg",
-      genre: "Adventure",
-      duration: "0:47",
+    item: {
+      contentId: 1,
+      contentTitle: "The Shawshank Redemption",
+      contentPosterImage: "https://image.tmdb.org/t/p/original/avedvodAZUcwqevBfm8p4G2NziQ.jpg",
+      contentYear: 1994,
+      contentRating: 9.3,
     },
   },
+  tags: ["autodocs"],
   decorators: [
     Story => (
-      <div style={{ width: "300px", height: "200px", margin: "50px" }}>
+      <div style={{ width: "300px", aspectRatio: "16/9" }}>
         <Story />
       </div>
     ),
