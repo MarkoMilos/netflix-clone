@@ -9,6 +9,8 @@ export default async function HomePage() {
   // Fetch a random trending movie for the billboard
   const billboardMovie = await contentService.getRandomTrendingMovie();
 
+  // TODO we can move home data composition logic to a content service
+
   // Fetch popular movies, trending movies, and genre movies in parallel
   const [popularMovies, trendingMovies, genreMovies] = await Promise.all([
     TMDBService.getPopularMovies(),

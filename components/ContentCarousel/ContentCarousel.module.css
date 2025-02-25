@@ -114,23 +114,22 @@
   object-position: center;
 }
 
-.itemTitleOverlay {
+.itemTitle {
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 50px 8px 5px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-}
-
-.itemTitle {
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #e50914;
+  border-top-left-radius: 0.2vw;
+  border-top-right-radius: 0.2vw;
   color: white;
-  font-size: 0.75vw;
+  font-size: 0.6vw;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+  padding: 2px 8px;
 }
 
 .handle {

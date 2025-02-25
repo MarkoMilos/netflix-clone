@@ -177,9 +177,7 @@ export default function ContentCarousel({ title, data }: { title: string; data: 
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={item.contentPosterImage} alt={item.contentTitle} />
-                <div className={styles.itemTitleOverlay}>
-                  <div className={styles.itemTitle}>{item.contentTitle}</div>
-                </div>
+                <div className={styles.itemTitle}>{item.contentTitle}</div>
               </div>
             ))}
           </div>
