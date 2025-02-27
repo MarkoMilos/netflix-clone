@@ -6,9 +6,16 @@ import { useEffect } from "react";
 interface ErrorBoundaryProps {
   error: Error & { digest?: string };
   reset: () => void;
+  title?: string;
+  message?: string;
 }
 
-export default function ErrorBoundary({ error, reset }: ErrorBoundaryProps) {
+export default function ErrorBoundary({
+  error,
+  reset,
+  title = "Something went wrong",
+  message = "We're having trouble loading the content. Please try again later.",
+}: ErrorBoundaryProps) {
   const router = useRouter();
   const isServerError = !!error.digest;
 
@@ -29,10 +36,8 @@ export default function ErrorBoundary({ error, reset }: ErrorBoundaryProps) {
   return (
     <div className="flex h-screen w-full items-center justify-center bg-black">
       <div className="max-w-md rounded-md bg-red-700 p-6 text-center">
-        <h2 className="mb-4 text-2xl font-bold text-white">Something went wrong</h2>
-        <p className="mb-4 text-white">
-          We&apos;re having trouble loading the content. Please try again later.
-        </p>
+        <h2 className="mb-4 text-2xl font-bold text-white">{title}</h2>
+        <p className="mb-4 text-white">{message}</p>
         <div className="flex justify-center space-x-4">
           <button
             type="button"
