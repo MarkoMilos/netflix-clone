@@ -42,7 +42,13 @@
   visibility: hidden;
   transform: scale(0.75);
   transition: all 0.3s ease;
-  transition-delay: 0s;
+  transition-delay: 0s;  
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.3vw;
+  overflow: hidden;
+  background-color: #181818;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
 /* Dialog position classes */
@@ -71,17 +77,6 @@
 /* Add this to make disappearing instant when moving mouse away */
 .container:not(:hover) .dialog {
   transition-delay: 0s;
-}
-
-.dialogInner {
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  border-radius: 0.3vw;
-  overflow: hidden;
-  background-color: #181818;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
 .dialogPoster {
