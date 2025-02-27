@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// TODO do we need try catch like this here or should we propagate error
 import logger from "@/lib/logger";
 import { Movie, Video, Genre } from "@/types";
 
@@ -29,7 +28,7 @@ const TMDBService = {
 
       return response.data.results;
     } catch (error) {
-      logger.warn("Failed to fetch trending movies:", error);
+      logger.error("Failed to fetch trending movies:", error);
       throw error;
     }
   },
@@ -48,8 +47,8 @@ const TMDBService = {
       });
       return response.data.results;
     } catch (error) {
-      logger.warn("Failed to fetch popular movies:", error);
-      return [];
+      logger.error("Failed to fetch popular movies:", error);
+      throw error;
     }
   },
   /**
@@ -62,8 +61,8 @@ const TMDBService = {
       const response = await client.get(`/movie/${movieId}/videos`);
       return response.data.results as Video[];
     } catch (error) {
-      logger.warn(`Failed to fetch videos for movie ${movieId}:`, error);
-      return [];
+      logger.error(`Failed to fetch videos for movie ${movieId}:`, error);
+      throw error;
     }
   },
 
@@ -78,8 +77,8 @@ const TMDBService = {
       });
       return response.data.genres;
     } catch (error) {
-      logger.warn("Failed to fetch movie genres:", error);
-      return [];
+      logger.error("Failed to fetch movie genres:", error);
+      throw error;
     }
   },
 
@@ -101,8 +100,8 @@ const TMDBService = {
       });
       return response.data.results;
     } catch (error) {
-      logger.warn(`Failed to fetch movies for genre ${genreId}:`, error);
-      return [];
+      logger.error(`Failed to fetch movies for genre ${genreId}:`, error);
+      throw error;
     }
   },
 
@@ -124,8 +123,8 @@ const TMDBService = {
 
       return Promise.all(genreMoviesPromises);
     } catch (error) {
-      logger.warn("Failed to fetch movies for genres:", error);
-      return [];
+      logger.error("Failed to fetch movies for genres:", error);
+      throw error;
     }
   },
 };

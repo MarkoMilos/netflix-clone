@@ -1,8 +1,8 @@
 import winston from "winston";
 
-const logFormat = winston.format.printf(({ level, message, timestamp }) => {
-  return `${timestamp} [${level.toUpperCase()}]: ${message}`;
-});
+const logFormat = winston.format.printf(
+  ({ level, message, timestamp }) => `${timestamp} [${level.toUpperCase()}]: ${message}`,
+);
 
 const logger = winston.createLogger({
   level: process.env.NODE_ENV === "production" ? "info" : "debug",
