@@ -37,13 +37,28 @@
 .dialog {
   position: absolute;
   top: -25%;
-  left: -25%;
   width: 150%;
   opacity: 0;
   visibility: hidden;
   transform: scale(0.75);
   transition: all 0.3s ease;
   transition-delay: 0s;
+}
+
+/* Dialog position classes */
+.dialog-align-left {
+  left: 0;
+  right: auto;
+}
+
+.dialog-align-center {
+  left: -25%;
+  right: auto;
+}
+
+.dialog-align-right {
+  left: auto;
+  right: 0;
 }
 
 .container:hover .dialog {

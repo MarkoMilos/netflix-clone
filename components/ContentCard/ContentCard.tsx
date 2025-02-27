@@ -6,18 +6,24 @@ import styles from "./ContentCard.module.css";
 import Icon from "@/components/Icons";
 import { ContentItem } from "@/types";
 
+export type DialogPosition = "align-left" | "align-center" | "align-right";
+
 interface ContentCardProps {
   item: ContentItem;
+  dialogPosition?: DialogPosition;
 }
 
-export default function ContentCard({ item }: ContentCardProps) {
+export default function ContentCard({ item, dialogPosition = "align-center" }: ContentCardProps) {
+  // Determine dialog CSS classes based on position
+  const dialogClasses = `${styles.dialog} ${styles[`dialog-${dialogPosition}`]}`;
+
   return (
     <div className={styles.container}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className={styles.poster} src={item.contentPosterImage} alt="poster" />
       <div className={styles.title}>{item.contentTitle}</div>
 
-      <div className={styles.dialog}>
+      <div className={dialogClasses}>
         <div className={styles.dialogInner}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className={styles.dialogPoster} src={item.contentPosterImage} alt="poster" />

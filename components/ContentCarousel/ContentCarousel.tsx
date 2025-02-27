@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import styles from "./ContentCarousel.module.css";
-import ContentCard from "@/components/ContentCard/ContentCard";
+import ContentCard, { DialogPosition } from "@/components/ContentCard/ContentCard";
 import Icon from "@/components/Icons";
 import { ResponsiveValue, useResponsiveValue } from "@/hooks/useResponsiveValue";
 import { ContentItem } from "@/types";
@@ -14,6 +14,11 @@ type SlideDirection = "next" | "previous";
 type AnimationState = {
   isSliding: boolean;
   direction: SlideDirection | null;
+};
+
+type CarouselItem = {
+  item: ContentItem;
+  dialogPosition: DialogPosition;
 };
 
 // Defines the animation duration for the carousel
@@ -76,7 +81,7 @@ export default function ContentCarousel({ title, data }: { title: string; data: 
     return baseTranslation;
   }, [itemWidth, isCircular, animationState]);
 
-  const contentItems = useMemo(() => {
+  const carouselItems = useMemo(() => {
     // Calculate the number of items to display based on user slider state (circular/non-circular)
     // - Non-ciruclar (initial state): visibleItems * 2 + 1 (initial items + 1 partial + items after next animation)
     // - Circular (after interaction): visibleItems * 3 + 2 (visible items + left/right items + 2 partial)
@@ -88,11 +93,28 @@ export default function ContentCarousel({ title, data }: { title: string; data: 
     const startIndex = isCircular
       ? (firstVisibleItemIndex - visibleItems - 1 + data.length) % data.length
       : 0;
-    // Generate the content items to display
-    const items = [];
+
+    // Calculate the first and last fully visible item indices
+    const visibleItemsStartIndex = isCircular ? visibleItems + 1 : 0;
+    const visibleItemsEndIndex = visibleItemsStartIndex + visibleItems - 1;
+
+    // Generate the carousel items with content and dialog position
+    const items: CarouselItem[] = [];
     for (let i = 0; i < numberOfItems; i += 1) {
-      items.push(data[(startIndex + i) % data.length]);
+      // Determine dialog position based on index
+      let dialogPosition: DialogPosition = "align-center";
+      if (i === visibleItemsStartIndex) {
+        dialogPosition = "align-left";
+      } else if (i === visibleItemsEndIndex) {
+        dialogPosition = "align-right";
+      }
+
+      items.push({
+        item: data[(startIndex + i) % data.length],
+        dialogPosition,
+      });
     }
+
     return items;
   }, [isCircular, firstVisibleItemIndex, visibleItems, data]);
 
@@ -164,14 +186,17 @@ export default function ContentCarousel({ title, data }: { title: string; data: 
                 : "none",
             }}
           >
-            {contentItems.map((item, index) => (
+            {carouselItems.map((carouselItem, index) => (
               <div
                 // eslint-disable-next-line react/no-array-index-key
-                key={`${item.contentId}-${index}-${firstVisibleItemIndex}`}
+                key={`${carouselItem.item.contentId}-${index}-${firstVisibleItemIndex}`}
                 className={styles.item}
                 style={{ width: `${itemWidth}%` }}
               >
-                <ContentCard item={item} />
+                <ContentCard
+                  item={carouselItem.item}
+                  dialogPosition={carouselItem.dialogPosition}
+                />
               </div>
             ))}
           </div>
