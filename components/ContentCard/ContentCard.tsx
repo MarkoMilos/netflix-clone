@@ -61,10 +61,10 @@ export default function ContentCard({ item, dialogPosition = "align-center" }: C
           </div>
 
           <div className={styles.dialogGenres}>
-            {["Action", "Adventure", "Suspense"].map((genre, index) => (
-              <span className={styles.genreLabel} key={genre}>
+            {item.genres?.map((genre, index) => (
+              <span className={styles.genreLabel} key={genre.id}>
                 {index > 0 && <span className={styles.genreSeparator}>&middot;</span>}
-                {genre}
+                {genre.name}
               </span>
             ))}
           </div>

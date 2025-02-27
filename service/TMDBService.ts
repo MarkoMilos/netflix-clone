@@ -108,13 +108,14 @@ const TMDBService = {
 
   /**
    * Fetch all genres and their corresponding movies
+   * @param genres - Optional array of genres to use instead of fetching them
    * @returns Array of objects containing genre and its movies
    */
-  async getMoviesForAllGenres() {
+  async getMoviesByGenres(genres?: Genre[]) {
     try {
-      const genres = await this.getGenres();
+      const genresList = genres || (await this.getGenres());
 
-      const genreMoviesPromises = genres.map(genre =>
+      const genreMoviesPromises = genresList.map(genre =>
         this.getMoviesByGenre(genre.id).then(movies => ({
           genre,
           movies,
