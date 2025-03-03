@@ -2,12 +2,8 @@
   position: relative;
   width: 100%;
   padding: 35.71428571% 0;
-  z-index: 1;
   border-radius: 0.2vw;
-}
-
-.container:hover {
-  z-index: 10;
+  overflow: hidden;
 }
 
 .rank {
@@ -30,43 +26,4 @@
   width: 50%;
   height: 100%;
   object-fit: cover;
-}
-
-.dialogWrapper {
-  position: absolute;
-  top: -25%;
-  width: 150%;
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(0.75);
-  transition: all 0.3s ease;
-  transition-delay: 0s;
-}
-
-/* Dialog position classes */
-.dialogWrapper-align-left {
-  left: 0;
-  right: auto;
-}
-
-.dialogWrapper-align-center {
-  left: -25%;
-  right: auto;
-}
-
-.dialogWrapper-align-right {
-  left: auto;
-  right: 0;
-}
-
-.container:hover .dialogWrapper {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1);
-  transition-delay: 0.5s;
-}
-
-/* Add this to make disappearing instant when moving mouse away */
-.container:not(:hover) .dialogWrapper {
-  transition-delay: 0s;
 }

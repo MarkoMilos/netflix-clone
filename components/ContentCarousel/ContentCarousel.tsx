@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import styles from "./ContentCarousel.module.css";
-import ContentCard, { DialogPosition } from "@/components/ContentCard/ContentCard";
+import ContentCard from "@/components/ContentCard/ContentCard";
+import { ContentDialogWrapper, DialogPosition } from "@/components/ContentDialog";
 import ContentRankCard from "@/components/ContentRankCard/ContentRankCard";
 import Icon from "@/components/Icons";
 import { ResponsiveValue, useResponsiveValue } from "@/hooks/useResponsiveValue";
@@ -210,18 +211,19 @@ export default function ContentCarousel({
                 className={styles.item}
                 style={{ width: `${itemWidth}%` }}
               >
-                {type === "ranked" ? (
-                  <ContentRankCard
-                    content={carouselItem.content}
-                    rank={carouselItem.contentPosition + 1}
-                    dialogPosition={carouselItem.dialogPosition}
-                  />
-                ) : (
-                  <ContentCard
-                    item={carouselItem.content}
-                    dialogPosition={carouselItem.dialogPosition}
-                  />
-                )}
+                <ContentDialogWrapper
+                  item={carouselItem.content}
+                  position={carouselItem.dialogPosition}
+                >
+                  {type === "ranked" ? (
+                    <ContentRankCard
+                      content={carouselItem.content}
+                      rank={carouselItem.contentPosition + 1}
+                    />
+                  ) : (
+                    <ContentCard item={carouselItem.content} />
+                  )}
+                </ContentDialogWrapper>
               </div>
             ))}
           </div>
