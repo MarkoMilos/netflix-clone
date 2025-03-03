@@ -13,11 +13,11 @@ const meta: Meta<typeof ContentCard> = {
   },
   args: {
     item: {
-      contentId: 1,
-      contentTitle: "The Shawshank Redemption",
-      contentPosterImage: "https://image.tmdb.org/t/p/original/avedvodAZUcwqevBfm8p4G2NziQ.jpg",
-      contentYear: 1994,
-      contentRating: 9.3,
+      id: 1,
+      title: "The Shawshank Redemption",
+      backDropImage: "https://image.tmdb.org/t/p/original/avedvodAZUcwqevBfm8p4G2NziQ.jpg",
+      releaseYear: 1994,
+      voteRating: 9.3,
     },
   },
   tags: ["autodocs"],

@@ -48,7 +48,9 @@ const contentService = {
 
     // Map movies to content items and hydrate with genre information
     const popularContentItems = popular.map(movie => mapMovieToContentItem(movie, genres));
-    const trendingContentItems = trending.map(movie => mapMovieToContentItem(movie, genres));
+    const trendingContentItems = trending
+      .map(movie => mapMovieToContentItem(movie, genres))
+      .slice(0, 10);
     const genreContentItemMap = byGenre.map(({ genre, movies }) => ({
       genre,
       contentItems: movies.map(movie => mapMovieToContentItem(movie, genres)),
@@ -58,16 +60,19 @@ const contentService = {
     const popularContent: ContentSection = {
       label: "Popular on Netflix",
       content: popularContentItems,
+      type: "standard",
     };
 
     const trendingContent: ContentSection = {
       label: "Trending Now",
       content: trendingContentItems,
+      type: "ranked",
     };
 
     const genreContent: ContentSection[] = genreContentItemMap.map(({ genre, contentItems }) => ({
       label: genre.name,
       content: contentItems,
+      type: "standard",
     }));
 
     // Combine all content sections

@@ -1,0 +1,116 @@
+.dialog {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.3vw;
+  overflow: hidden;
+  background-color: #181818;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+}
+
+.poster {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  object-position: center;
+}
+
+.contentContainer {
+  padding: 1em;
+}
+
+.title {
+  color: white;
+  font-size: 1vw;
+  font-weight: 700;
+  margin-bottom: 0.5vw;
+}
+
+.actionsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.playButton {
+  padding: 0.8rem;
+  border-radius: 50%;
+  background-color: white;
+  color: black;
+  margin: 0.25em;
+  cursor: pointer;
+}
+
+.playButton:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.watchlistButton,
+.likeButton,
+.moreButton {
+  padding: 0.8rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background-color: rgba(42, 42, 42, 0.6);
+  color: white;
+  margin: 0.25em;
+  cursor: pointer;
+}
+
+.moreButton {
+  margin-left: auto;
+}
+
+.watchlistButton:hover,
+.likeButton:hover,
+.moreButton:hover {
+  border-color: white;
+}
+
+.playIcon,
+.watchlistIcon,
+.likeIcon,
+.moreIcon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.spatialIcon {
+  width: 4em;
+  height: 2em;
+}
+
+.labels {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 0.25em;
+  gap: 0.7vw;
+  margin-bottom: 0.5vw;
+}
+
+.labelYear,
+.labelRating {
+  color: #a3a3a3;
+  font-size: 0.8vw;
+}
+
+.genresContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  font-size: 0.8vw;
+  color: white;
+}
+
+.genresSeparator {
+  font-size: 0.8vw;
+  font-weight: 700;
+  color: #a3a3a3;
+  margin-right: 0.5em;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}

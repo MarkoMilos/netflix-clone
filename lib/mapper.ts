@@ -1,4 +1,4 @@
-import { getBackdropUrl } from "./tmdb-image";
+import { getBackdropUrl, getPosterUrl } from "./tmdb-image";
 import { Movie, ContentItem, Genre } from "@/types";
 
 /**
@@ -18,11 +18,13 @@ const mapMovieToContentItem = (movie: Movie, genres: Genre[] = []): ContentItem 
       : [];
 
   return {
-    contentId: movie.id,
-    contentTitle: movie.title,
-    contentPosterImage: getBackdropUrl(movie.backdrop_path, "w780") ?? "",
-    contentYear: year,
-    contentRating: movie.vote_average,
+    id: movie.id,
+    title: movie.title,
+    posterImage: getPosterUrl(movie.poster_path, "w342") ?? "",
+    backDropImage: getBackdropUrl(movie.backdrop_path, "w780") ?? "",
+    releaseYear: year,
+    voteRating: movie.vote_average,
+    genre_ids: movie.genre_ids,
     genres: mappedGenres,
   };
 };

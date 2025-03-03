@@ -1,18 +1,20 @@
-import ContentCard from "@/components/ContentCard/ContentCard";
+import ContentRankCard from "@/components/ContentRankCard/ContentRankCard";
 
 export default function TestPage() {
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <div className="w-[300px] aspect-video bg-red-600">
-        <ContentCard
-          item={{
-            contentId: 1,
-            contentTitle: "The Shawshank Redemption",
-            contentPosterImage:
-              "https://image.tmdb.org/t/p/original/avedvodAZUcwqevBfm8p4G2NziQ.jpg",
-            contentYear: 1994,
-            contentRating: 9.3,
+    <div className="flex h-full flex-col items-center justify-center overflow-visible px-[60px]">
+      <div className="w-[16.6666%] overflow-visible">
+        <ContentRankCard
+          content={{
+            id: 1,
+            title: "Title",
+            posterImage: "https://placehold.co/100",
+            backDropImage: "https://placehold.co/100",
+            releaseYear: "2021",
+            voteRating: 5,
+            genres: [{ id: 1, name: "Action" }],
           }}
+          rank={4}
         />
       </div>
     </div>

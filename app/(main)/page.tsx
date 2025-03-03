@@ -22,7 +22,7 @@ export default async function HomePage() {
       <div className="relative pb-40">
         {homepageContent.map(section => (
           <div key={section.label} className="my-[3vw]">
-            <ContentCarousel title={section.label} data={section.content} />
+            <ContentCarousel label={section.label} content={section.content} type={section.type} />
           </div>
         ))}
       </div>

@@ -1,11 +1,12 @@
 import { Genre } from "./Genre";
 
 export type ContentItem = {
-  contentId: number;
-  contentTitle: string;
-  contentPosterImage: string;
-  contentYear: string;
-  contentRating: number;
+  id: number;
+  title: string;
+  posterImage: string;
+  backDropImage: string;
+  releaseYear: string;
+  voteRating: number;
   genre_ids?: number[];
   genres?: Genre[];
 };

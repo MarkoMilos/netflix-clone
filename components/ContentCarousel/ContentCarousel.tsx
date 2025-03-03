@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import styles from "./ContentCarousel.module.css";
 import ContentCard, { DialogPosition } from "@/components/ContentCard/ContentCard";
+import ContentRankCard from "@/components/ContentRankCard/ContentRankCard";
 import Icon from "@/components/Icons";
 import { ResponsiveValue, useResponsiveValue } from "@/hooks/useResponsiveValue";
 import { ContentItem } from "@/types";
@@ -14,11 +15,6 @@ type SlideDirection = "next" | "previous";
 type AnimationState = {
   isSliding: boolean;
   direction: SlideDirection | null;
-};
-
-type CarouselItem = {
-  item: ContentItem;
-  dialogPosition: DialogPosition;
 };
 
 // Defines the animation duration for the carousel
@@ -33,13 +29,30 @@ const CAROUSEL_RESPONSIVE_CONFIG: ResponsiveValue<number> = {
   xl: 6, // >= 1400px: 6 items
 };
 
-export default function ContentCarousel({ title, data }: { title: string; data: ContentItem[] }) {
+type CarouselItem = {
+  content: ContentItem;
+  contentPosition: number;
+  dialogPosition: DialogPosition;
+};
+
+type ContentCarouselProps = {
+  label: string;
+  content: ContentItem[];
+  type?: "standard" | "ranked";
+};
+
+export default function ContentCarousel({
+  label,
+  content,
+  type = "standard",
+}: ContentCarouselProps) {
+  // Define the carousel states
   const [firstVisibleItemIndex, setFirstVisibleItemIndex] = useState(0); // Index of the first fully visible item
   const [isCircular, setIsCircular] = useState(false); // Tracks if the carousel is in circular mode
   const [animationState, setAnimationState] = useState<AnimationState>({
     isSliding: false,
     direction: null,
-  });
+  }); // Tracks the current animation state
   const [isMounted, setIsMounted] = useState(false); // Tracks if the component is mounted
 
   // Calculate the number of items to show based on the current screen size
@@ -91,7 +104,7 @@ export default function ContentCarousel({ title, data }: { title: string; data: 
     // - Circular (after interaction): shift back by (visibleItems + 1) positions to include hidden left items,
     //   add array length and use modulo to handle wraparound
     const startIndex = isCircular
-      ? (firstVisibleItemIndex - visibleItems - 1 + data.length) % data.length
+      ? (firstVisibleItemIndex - visibleItems - 1 + content.length) % content.length
       : 0;
 
     // Calculate the first and last fully visible item indices
@@ -109,14 +122,17 @@ export default function ContentCarousel({ title, data }: { title: string; data: 
         dialogPosition = "align-right";
       }
 
+      const index = (startIndex + i) % content.length;
+
       items.push({
-        item: data[(startIndex + i) % data.length],
+        content: content[index],
+        contentPosition: index,
         dialogPosition,
       });
     }
 
     return items;
-  }, [isCircular, firstVisibleItemIndex, visibleItems, data]);
+  }, [isCircular, firstVisibleItemIndex, visibleItems, content]);
 
   const slide = useCallback(
     (direction: SlideDirection) => {
@@ -129,12 +145,13 @@ export default function ContentCarousel({ title, data }: { title: string; data: 
       setTimeout(() => {
         setAnimationState({ isSliding: false, direction: null });
         setFirstVisibleItemIndex(
-          prevIndex => (prevIndex + directionFactor * visibleItems + data.length) % data.length,
+          prevIndex =>
+            (prevIndex + directionFactor * visibleItems + content.length) % content.length,
         );
         if (!isCircular) setIsCircular(true);
       }, ANIMATION_DURATION);
     },
-    [animationState, isCircular, visibleItems, data],
+    [animationState, isCircular, visibleItems, content],
   );
 
   const handlePrevious = useCallback((): void => slide("previous"), [slide]);
@@ -151,7 +168,7 @@ export default function ContentCarousel({ title, data }: { title: string; data: 
     <div className={styles.container}>
       <div className={styles.headerContainer}>
         <Link className={styles.headerLink} href="/content">
-          <div className={styles.headerTitle}>{title}</div>
+          <div className={styles.headerTitle}>{label}</div>
           <div className={styles.headerMore}>Explore All</div>
           <Icon name="chevron" className={styles.headerIcon} />
         </Link>
@@ -189,14 +206,22 @@ export default function ContentCarousel({ title, data }: { title: string; data: 
             {carouselItems.map((carouselItem, index) => (
               <div
                 // eslint-disable-next-line react/no-array-index-key
-                key={`${carouselItem.item.contentId}-${index}-${firstVisibleItemIndex}`}
+                key={`${carouselItem.content.id}-${index}-${firstVisibleItemIndex}`}
                 className={styles.item}
                 style={{ width: `${itemWidth}%` }}
               >
-                <ContentCard
-                  item={carouselItem.item}
-                  dialogPosition={carouselItem.dialogPosition}
-                />
+                {type === "ranked" ? (
+                  <ContentRankCard
+                    content={carouselItem.content}
+                    rank={carouselItem.contentPosition + 1}
+                    dialogPosition={carouselItem.dialogPosition}
+                  />
+                ) : (
+                  <ContentCard
+                    item={carouselItem.content}
+                    dialogPosition={carouselItem.dialogPosition}
+                  />
+                )}
               </div>
             ))}
           </div>
