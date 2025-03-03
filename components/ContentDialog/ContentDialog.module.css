@@ -22,7 +22,7 @@
 
 .title {
   color: white;
-  font-size: 1vw;
+  font-size: 20px;
   font-weight: 700;
   margin-bottom: 0.5vw;
 }
@@ -85,6 +85,7 @@
 .labels {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   padding-left: 0.25em;
   gap: 0.7vw;
@@ -94,22 +95,23 @@
 .labelYear,
 .labelRating {
   color: #a3a3a3;
-  font-size: 0.8vw;
+  font-size: 16px;
 }
 
 .genresContainer {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 0.5em;
-  font-size: 0.8vw;
+  font-size: 16px;
   color: white;
+  line-height: 1.5;
 }
 
 .genresSeparator {
-  font-size: 0.8vw;
+  font-size: 16px;
   font-weight: 700;
   color: #a3a3a3;
-  margin-right: 0.5em;
   display: inline-flex;
   align-items: center;
   line-height: 1;

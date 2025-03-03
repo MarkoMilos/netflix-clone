@@ -57,6 +57,8 @@ export const WithMultipleGenres: Story = {
         { id: 2, name: "Sci-Fi" },
         { id: 3, name: "Thriller" },
         { id: 4, name: "Drama" },
+        { id: 5, name: "Mystery" },
+        { id: 6, name: "Adventure" },
       ],
     },
   },

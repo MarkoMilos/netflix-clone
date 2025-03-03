@@ -50,12 +50,14 @@ export default function ContentDialog({ item }: ContentDialogProps) {
         </div>
 
         <div className={styles.genresContainer}>
-          {item.genres?.map((genre, index) => (
-            <span key={genre.id}>
-              {index > 0 && <span className={styles.genresSeparator}>&middot;</span>}
-              {genre.name}
-            </span>
-          ))}
+          {item.genres?.map((genre, index) => [
+            index > 0 && (
+              <span key={`separator-${genre.id}`} className={styles.genresSeparator}>
+                &middot;
+              </span>
+            ),
+            <span key={genre.id}>{genre.name}</span>,
+          ])}
         </div>
       </div>
     </div>
