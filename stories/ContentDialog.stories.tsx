@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import ContentDialog from "@/components/ContentDialog/ContentDialog";
 
 const defaultArgs = {
-  item: {
+  content: {
     id: 1,
     title: "The Matrix",
     posterImage: "https://placehold.co/200x400",
@@ -26,7 +26,7 @@ const meta: Meta<typeof ContentDialog> = {
   },
   tags: ["autodocs"],
   argTypes: {
-    item: {
+    content: {
       description: "Content item to display in the dialog",
       control: "object",
     },
@@ -50,8 +50,8 @@ export const Default: Story = {
 
 export const WithMultipleGenres: Story = {
   args: {
-    item: {
-      ...defaultArgs.item,
+    content: {
+      ...defaultArgs.content,
       genres: [
         { id: 1, name: "Action" },
         { id: 2, name: "Sci-Fi" },
@@ -66,8 +66,8 @@ export const WithMultipleGenres: Story = {
 
 export const LongTitle: Story = {
   args: {
-    item: {
-      ...defaultArgs.item,
+    content: {
+      ...defaultArgs.content,
       title: "The Lord of the Rings: The Fellowship of the Ring Extended Edition",
     },
   },
@@ -75,8 +75,8 @@ export const LongTitle: Story = {
 
 export const NoGenres: Story = {
   args: {
-    item: {
-      ...defaultArgs.item,
+    content: {
+      ...defaultArgs.content,
       genres: [],
     },
   },
@@ -84,8 +84,8 @@ export const NoGenres: Story = {
 
 export const SquarePoster: Story = {
   args: {
-    item: {
-      ...defaultArgs.item,
+    content: {
+      ...defaultArgs.content,
       backDropImage: "https://placehold.co/170x170",
     },
   },

@@ -9,14 +9,15 @@ const meta: Meta<typeof ContentCard> = {
     layout: "centered",
   },
   argTypes: {
-    item: { control: "object" },
+    content: { control: "object" },
   },
   args: {
-    item: {
+    content: {
       id: 1,
       title: "The Shawshank Redemption",
-      backDropImage: "https://image.tmdb.org/t/p/original/avedvodAZUcwqevBfm8p4G2NziQ.jpg",
-      releaseYear: 1994,
+      posterImage: "https://placehold.co/300x450",
+      backDropImage: "https://placehold.co/400x200",
+      releaseYear: "1994",
       voteRating: 9.3,
     },
   },

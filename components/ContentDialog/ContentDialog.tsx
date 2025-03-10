@@ -4,33 +4,32 @@ import Link from "next/link";
 
 import styles from "./ContentDialog.module.css";
 import Icon from "@/components/Icons";
-import { ContentItem } from "@/types";
+import MyListButton from "@/components/MyListButton/MyListButton";
+import { Content } from "@/types";
 
 interface ContentDialogProps {
-  item: ContentItem;
+  content: Content;
 }
 
-export default function ContentDialog({ item }: ContentDialogProps) {
+export default function ContentDialog({ content }: ContentDialogProps) {
   return (
     <div className={styles.dialog}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.poster} src={item.backDropImage} alt="poster" />
+      <img className={styles.poster} src={content.backDropImage} alt="poster" />
 
       <div className={styles.contentContainer}>
-        <div className={styles.title}>{item.title}</div>
+        <div className={styles.title}>{content.title}</div>
 
         <div className={styles.actionsContainer}>
           {/* Play button */}
-          <Link href={`/watch/${item.id}`}>
+          <Link href={`/watch/${content.id}`}>
             <div className={styles.playButton}>
               <Icon name="play" className={styles.playIcon} />
             </div>
           </Link>
 
-          {/* Add to watchlist button */}
-          <button type="button" className={styles.watchlistButton}>
-            <Icon name="plus" className={styles.watchlistIcon} />
-          </button>
+          {/* MyList button */}
+          <MyListButton content={content} className={styles.myListButton} />
 
           {/* Like button */}
           <button type="button" className={styles.likeButton}>
@@ -44,13 +43,13 @@ export default function ContentDialog({ item }: ContentDialogProps) {
         </div>
 
         <div className={styles.labels}>
-          <span className={styles.labelYear}>{item.releaseYear}</span>
-          <span className={styles.labelRating}>Rating: {item.voteRating}</span>
+          <span className={styles.labelYear}>{content.releaseYear}</span>
+          <span className={styles.labelRating}>Rating: {content.voteRating}</span>
           <Icon className={styles.spatialIcon} name="spatial" />
         </div>
 
         <div className={styles.genresContainer}>
-          {item.genres?.map((genre, index) => [
+          {content.genres?.map((genre, index) => [
             index > 0 && (
               <span key={`separator-${genre.id}`} className={styles.genresSeparator}>
                 &middot;

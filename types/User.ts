@@ -6,5 +6,4 @@ export type User = {
   emailVerified: Date | null;
   createdAt: Date;
   updatedAt: Date;
-  favouriteIds: string[];
 };

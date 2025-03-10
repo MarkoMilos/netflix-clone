@@ -1,0 +1,23 @@
+.button {
+  padding: 0.8rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background-color: rgba(42, 42, 42, 0.6);
+  color: white;
+  margin: 0.25em;
+  cursor: pointer;
+}
+
+.button:hover {
+  border-color: white;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.icon {
+  width: 1.6rem;
+  height: 1.6rem;
+}

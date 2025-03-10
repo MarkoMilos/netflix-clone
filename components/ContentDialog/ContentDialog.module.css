@@ -47,7 +47,10 @@
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-.watchlistButton,
+.myListButton {
+  margin: 0.25em;
+}
+
 .likeButton,
 .moreButton {
   padding: 0.8rem;
@@ -63,14 +66,12 @@
   margin-left: auto;
 }
 
-.watchlistButton:hover,
 .likeButton:hover,
 .moreButton:hover {
   border-color: white;
 }
 
 .playIcon,
-.watchlistIcon,
 .likeIcon,
 .moreIcon {
   width: 1.6rem;

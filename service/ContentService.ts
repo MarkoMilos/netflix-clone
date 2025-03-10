@@ -1,4 +1,4 @@
-import mapMovieToContentItem from "@/lib/mapper";
+import { mapMovieToContent } from "@/lib/mapper";
 import TMDBService from "@/service/TMDBService";
 import { Movie, ContentSection } from "@/types";
 
@@ -47,13 +47,13 @@ const contentService = {
     ]);
 
     // Map movies to content items and hydrate with genre information
-    const popularContentItems = popular.map(movie => mapMovieToContentItem(movie, genres));
+    const popularContentItems = popular.map(movie => mapMovieToContent(movie, genres));
     const trendingContentItems = trending
-      .map(movie => mapMovieToContentItem(movie, genres))
+      .map(movie => mapMovieToContent(movie, genres))
       .slice(0, 10);
     const genreContentItemMap = byGenre.map(({ genre, movies }) => ({
       genre,
-      contentItems: movies.map(movie => mapMovieToContentItem(movie, genres)),
+      content: movies.map(movie => mapMovieToContent(movie, genres)),
     }));
 
     // Create content sections
@@ -69,9 +69,9 @@ const contentService = {
       type: "ranked",
     };
 
-    const genreContent: ContentSection[] = genreContentItemMap.map(({ genre, contentItems }) => ({
+    const genreContent: ContentSection[] = genreContentItemMap.map(({ genre, content }) => ({
       label: genre.name,
-      content: contentItems,
+      content,
       type: "standard",
     }));
 

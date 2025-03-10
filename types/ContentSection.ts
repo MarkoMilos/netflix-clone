@@ -1,7 +1,7 @@
-import { ContentItem } from "./ContentItem";
+import { Content } from "./Content";
 
 export type ContentSection = {
   label: string;
-  content: ContentItem[];
+  content: Content[];
   type: "standard" | "ranked";
 };

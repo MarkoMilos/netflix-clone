@@ -9,7 +9,7 @@ import { ContentDialogWrapper, DialogPosition } from "@/components/ContentDialog
 import ContentRankCard from "@/components/ContentRankCard/ContentRankCard";
 import Icon from "@/components/Icons";
 import { ResponsiveValue, useResponsiveValue } from "@/hooks/useResponsiveValue";
-import { ContentItem } from "@/types";
+import { Content } from "@/types";
 
 type SlideDirection = "next" | "previous";
 
@@ -31,14 +31,14 @@ const CAROUSEL_RESPONSIVE_CONFIG: ResponsiveValue<number> = {
 };
 
 type CarouselItem = {
-  content: ContentItem;
+  content: Content;
   contentPosition: number;
   dialogPosition: DialogPosition;
 };
 
 type ContentCarouselProps = {
   label: string;
-  content: ContentItem[];
+  content: Content[];
   type?: "standard" | "ranked";
 };
 
@@ -221,7 +221,7 @@ export default function ContentCarousel({
                       rank={carouselItem.contentPosition + 1}
                     />
                   ) : (
-                    <ContentCard item={carouselItem.content} />
+                    <ContentCard content={carouselItem.content} />
                   )}
                 </ContentDialogWrapper>
               </div>

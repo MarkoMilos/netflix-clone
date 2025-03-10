@@ -11,10 +11,10 @@ import Number6Svg from "@/assets/icons/number-6.svg";
 import Number7Svg from "@/assets/icons/number-7.svg";
 import Number8Svg from "@/assets/icons/number-8.svg";
 import Number9Svg from "@/assets/icons/number-9.svg";
-import { ContentItem } from "@/types";
+import { Content } from "@/types";
 
 type ContentRankCardProps = {
-  content: ContentItem;
+  content: Content;
   rank: number;
 };
 

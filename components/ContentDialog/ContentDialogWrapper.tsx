@@ -1,6 +1,6 @@
-import { ContentDialog } from ".";
+import ContentDialog from "./ContentDialog";
 import styles from "./ContentDialogWrapper.module.css";
-import { ContentItem } from "@/types";
+import { Content } from "@/types";
 
 export type DialogPosition = "align-left" | "align-center" | "align-right";
 
@@ -10,7 +10,7 @@ export function ContentDialogWrapper({
   position,
 }: {
   children: React.ReactNode;
-  item: ContentItem;
+  item: Content;
   position: DialogPosition;
 }) {
   const dialogContainerClasses = `${styles.dialogContainer} ${styles[`dialogContainer-${position}`]}`;
@@ -19,7 +19,7 @@ export function ContentDialogWrapper({
     <div className={styles.dialogWrapper}>
       {children}
       <div className={dialogContainerClasses}>
-        <ContentDialog item={item} />
+        <ContentDialog content={item} />
       </div>
     </div>
   );
