@@ -212,7 +212,7 @@ export default function ContentCarousel({
                 style={{ width: `${itemWidth}%` }}
               >
                 <ContentDialogWrapper
-                  item={carouselItem.content}
+                  content={carouselItem.content}
                   position={carouselItem.dialogPosition}
                 >
                   {type === "ranked" ? (

@@ -1,23 +1,9 @@
 import React from "react";
 
-import Billboard from "@/components/Billboard";
-import MovieGrid from "@/components/MovieGrid/MovieGrid";
-import movieRepository from "@/repository/MovieRepository";
-import contentService from "@/service/ContentService";
-
 export default async function MoviesPage() {
-  const movies = (await movieRepository.getAll()) ?? [];
-  const billboardMovie = await contentService.getRandomTrendingMovie();
-
   return (
-    <>
-      <div className="relative w-full pb-[40%]">
-        <Billboard data={billboardMovie} />
-      </div>
-
-      <div className="mt-4 px-4 pb-40">
-        <MovieGrid movies={movies} />
-      </div>
-    </>
+    <div className="flex min-h-screen items-center justify-center">
+      <h1 className="text-4xl font-bold text-white">MOVIES</h1>
+    </div>
   );
 }

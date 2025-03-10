@@ -6,11 +6,11 @@ export type DialogPosition = "align-left" | "align-center" | "align-right";
 
 export function ContentDialogWrapper({
   children,
-  item,
+  content,
   position,
 }: {
   children: React.ReactNode;
-  item: Content;
+  content: Content;
   position: DialogPosition;
 }) {
   const dialogContainerClasses = `${styles.dialogContainer} ${styles[`dialogContainer-${position}`]}`;
@@ -19,7 +19,7 @@ export function ContentDialogWrapper({
     <div className={styles.dialogWrapper}>
       {children}
       <div className={dialogContainerClasses}>
-        <ContentDialog content={item} />
+        <ContentDialog content={content} />
       </div>
     </div>
   );

@@ -1,16 +1,14 @@
-import React from "react";
+import { redirect } from "next/navigation";
 
-import MovieGrid from "@/components/MovieGrid/MovieGrid";
-import movieRepository from "@/repository/MovieRepository";
+import MyList from "@/components/MyList/MyList";
+import { authUser } from "@/lib/auth/session";
+import { getMyList } from "@/service/MyListService";
 
 export default async function MyListPage() {
-  const movies = (await movieRepository.getAll()) ?? [];
+  const user = await authUser();
+  if (!user) return redirect("/login");
 
-  return (
-    <div className="w-full px-4 pt-[120px]">
-      <p className="mb-4 text-lg font-bold text-white">My List</p>
+  const content = await getMyList(user.id);
 
-      <MovieGrid movies={movies} />
-    </div>
-  );
+  return <MyList initialData={content} />;
 }
