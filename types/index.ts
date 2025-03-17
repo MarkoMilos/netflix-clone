@@ -5,3 +5,5 @@ export * from "./Profile";
 export * from "./Genre";
 export * from "./Content";
 export * from "./ContentSection";
+export * from "./Image";
+export * from "./CastMember";

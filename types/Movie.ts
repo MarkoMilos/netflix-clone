@@ -1,4 +1,7 @@
-import { Video } from "@/types/Video";
+import { CastMember } from "./CastMember";
+import { Genre } from "./Genre";
+import { ImageCollection } from "./Image";
+import { Video } from "./Video";
 
 export type Movie = {
   adult: boolean;
@@ -16,5 +19,9 @@ export type Movie = {
   video: boolean;
   vote_average: number;
   vote_count: number;
-  videos?: Video[] | null;
+  genres?: Genre[];
+  images?: ImageCollection;
+  videos?: Video[];
+  cast?: CastMember[];
+  similar?: Movie[];
 };

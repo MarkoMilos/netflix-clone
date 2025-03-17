@@ -4,7 +4,10 @@ import Link from "next/link";
 
 import styles from "./ContentDialog.module.css";
 import Icon from "@/components/Icons";
-import MyListButton from "@/components/MyListButton/MyListButton";
+import LikeButton from "@/components/LikeButton";
+import MyListButton from "@/components/MyListButton";
+import useInfoModal from "@/hooks/useInfoModal";
+import { getBackdropUrl } from "@/lib/tmdb-image";
 import { Content } from "@/types";
 
 interface ContentDialogProps {
@@ -12,10 +15,12 @@ interface ContentDialogProps {
 }
 
 export default function ContentDialog({ content }: ContentDialogProps) {
+  const { openModal } = useInfoModal();
+
   return (
     <div className={styles.dialog}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.poster} src={content.backDropImage} alt="poster" />
+      <img className={styles.poster} src={getBackdropUrl(content.backDropImage)} alt="poster" />
 
       <div className={styles.contentContainer}>
         <div className={styles.title}>{content.title}</div>
@@ -27,17 +32,12 @@ export default function ContentDialog({ content }: ContentDialogProps) {
               <Icon name="play" className={styles.playIcon} />
             </div>
           </Link>
-
           {/* MyList button */}
           <MyListButton content={content} className={styles.myListButton} />
-
-          {/* Like button */}
-          <button type="button" className={styles.likeButton}>
-            <Icon name="like" className={styles.likeIcon} />
-          </button>
-
+          {/* Like button */}Í
+          <LikeButton />
           {/* More button */}
-          <button type="button" className={styles.moreButton}>
+          <button type="button" className={styles.moreButton} onClick={() => openModal(content.id)}>
             <Icon name="more" className={styles.moreIcon} />
           </button>
         </div>

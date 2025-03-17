@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import MyList from "@/components/MyList/MyList";
+import MyList from "@/components/MyList";
 import { authUser } from "@/lib/auth/session";
 import { getMyList } from "@/service/MyListService";
 

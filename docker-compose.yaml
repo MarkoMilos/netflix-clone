@@ -5,7 +5,7 @@ services:
     working_dir: /app
     volumes:
       - .:/app
-      - /app/node_modules
+      - node_modules_volume:/app/node_modules
     env_file:
       - .env
     ports:
@@ -41,3 +41,4 @@ services:
 
 volumes:
   postgres_data:
+  node_modules_volume:

@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./MyList.module.css";
-import ContentCard from "@/components/ContentCard/ContentCard";
+import ContentCard from "@/components/ContentCard";
 import { ContentDialogWrapper, DialogPosition } from "@/components/ContentDialog";
 import useMyList from "@/hooks/useMyList";
 import { ResponsiveValue, useResponsiveValue } from "@/hooks/useResponsiveValue";

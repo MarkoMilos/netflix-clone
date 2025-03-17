@@ -1,33 +1,54 @@
 import { Content as PrismaContent } from "@prisma/client";
 
-import { getBackdropUrl, getPosterUrl } from "./tmdb-image";
 import { Movie, Content, Genre } from "@/types";
+
+/**
+ * Assigns genres to a movie based on its genre_ids
+ * @param movie - Movie to assign genres to
+ * @param availableGenres - Available genres to assign from
+ * @returns Movie with genres assigned
+ */
+export const assignGenres = (movie: Movie, availableGenres: Genre[] = []): Movie => {
+  // If movie already has genres, return as is
+  if (movie.genres && movie.genres.length > 0) {
+    return movie;
+  }
+
+  // Otherwise assign genres from genre_ids
+  let genres: Genre[] = [];
+  if (movie.genre_ids && movie.genre_ids.length > 0 && availableGenres.length > 0) {
+    genres = availableGenres.filter(genre => movie.genre_ids.includes(genre.id));
+  }
+
+  // Return a new movie object with the assigned genres
+  return { ...movie, genres };
+};
 
 /**
  * Maps a Movie object to a Content object
  * @param movie - The Movie object to map
- * @param genres - An array of Genre objects to use for mapping
  * @returns A Content object
  */
-export const mapMovieToContent = (movie: Movie, genres: Genre[] = []): Content => {
+export const mapMovieToContent = (movie: Movie): Content => {
   // Parse year from release_date or use empty string if release_date is undefined
   const year = movie.release_date ? new Date(movie.release_date).getFullYear().toString() : "n/a";
-
-  // Map genres if genre_ids and genres are available
-  const mappedGenres =
-    movie.genre_ids && genres.length > 0
-      ? genres.filter(genre => movie.genre_ids.includes(genre.id))
-      : [];
+  // Map similar movies to content
+  const similarContent = movie.similar?.map(similarMovie => mapMovieToContent(similarMovie));
 
   return {
     id: movie.id,
     title: movie.title,
-    posterImage: getPosterUrl(movie.poster_path, "w342") ?? "",
-    backDropImage: getBackdropUrl(movie.backdrop_path, "w780") ?? "",
+    overview: movie.overview,
+    posterImage: movie.poster_path,
+    backDropImage: movie.backdrop_path,
     releaseYear: year,
     voteRating: movie.vote_average,
     genre_ids: movie.genre_ids,
-    genres: mappedGenres,
+    genres: movie.genres,
+    videos: movie.videos,
+    images: movie.images,
+    cast: movie.cast,
+    similar: similarContent,
   };
 };
 
@@ -48,6 +69,7 @@ export const mapPrismaContentToContent = (content: PrismaContent): Content => {
   return {
     id: content.id,
     title: content.title,
+    overview: content.overview,
     posterImage: content.posterImage || "",
     backDropImage: content.backDropImage || "",
     releaseYear: content.releaseYear || "",

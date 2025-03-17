@@ -1,4 +1,7 @@
+import { CastMember } from "./CastMember";
 import { Genre } from "./Genre";
+import { ImageCollection } from "./Image";
+import { Video } from "./Video";
 
 /**
  * Represents a content item in the streaming platform, which can be either a movie or TV show.
@@ -15,10 +18,15 @@ import { Genre } from "./Genre";
 export type Content = {
   id: number;
   title: string;
+  overview: string;
   posterImage: string;
   backDropImage: string;
   releaseYear: string;
   voteRating: number;
   genre_ids?: number[];
   genres?: Genre[];
+  images?: ImageCollection;
+  videos?: Video[];
+  cast?: CastMember[];
+  similar?: Content[];
 };

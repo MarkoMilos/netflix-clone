@@ -14,7 +14,7 @@ export default function GlobalError({
       error={error}
       reset={reset}
       title="A Global Error Occurred"
-      message="Something went wrong across the application."
+      message="Something went wrong!"
     />
   );
 }

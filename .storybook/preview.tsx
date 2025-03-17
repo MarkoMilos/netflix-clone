@@ -2,6 +2,7 @@ import type { Preview } from "@storybook/react";
 
 import "../app/globals.css";
 import netflixSans from "../lib/fonts";
+import React from "react";
 
 const preview: Preview = {
   parameters: {

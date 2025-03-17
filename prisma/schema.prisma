@@ -18,6 +18,7 @@ model User {
   name          String?
   email         String    @unique
   emailVerified DateTime?
+  password      String?
   image         String?
 
   accounts Account[]
@@ -68,17 +69,18 @@ model VerificationToken {
 }
 
 model Content {
-  id            Int      @id
+  id            Int    @id
   title         String
+  overview      String
   posterImage   String
   backDropImage String
   releaseYear   String
   voteRating    Float
   genre_ids     Int[]
   genres        Json?
-  
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   MyList MyList[]
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import logger from "@/lib/logger";
-import { Movie, Video, Genre } from "@/types";
+import { Movie, Video, Genre, CastMember } from "@/types";
 
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const { TMDB_ACCESS_TOKEN } = process.env;
@@ -32,6 +32,7 @@ const TMDBService = {
       throw error;
     }
   },
+
   /**
    * Fetch popular movies from TMDB API
    * @param page - Page number for pagination (default: 1)
@@ -51,6 +52,71 @@ const TMDBService = {
       throw error;
     }
   },
+
+  /**
+   * Fetch detailed information about a specific movie by its ID
+   * @param movieId - The TMDB ID of the movie
+   * @returns Detailed movie object including videos and images
+   */
+  async getMovieById(movieId: number): Promise<Movie> {
+    try {
+      const response = await client.get(`/movie/${movieId}`, {
+        params: {
+          language: "en-US",
+          append_to_response: "videos,images",
+          include_image_language: "en,null",
+        },
+      });
+
+      // Extract nested videos into the format expected by the Movie type
+      const movieData = response.data;
+      // Extract videos from the nested structure to match our Movie type
+      if (movieData.videos && Array.isArray(movieData.videos.results)) {
+        movieData.videos = movieData.videos.results;
+      }
+      return movieData;
+    } catch (error) {
+      logger.error(`Failed to fetch details for movie ${movieId}:`, error);
+      throw error;
+    }
+  },
+
+  /**
+   * Fetch movie cast from TMDB API
+   * @param movieId - The TMDB movie ID
+   * @returns Array of cast members
+   */
+  async getMovieCast(movieId: number): Promise<CastMember[]> {
+    try {
+      const response = await client.get(`/movie/${movieId}/credits`, {
+        params: { language: "en-US" },
+      });
+
+      return response.data.cast; // Return cast array
+    } catch (error) {
+      logger.error(`Failed to fetch movie cast for ${movieId}:`, error);
+      return [];
+    }
+  },
+
+  /**
+   * Fetch similar movies from TMDB API
+   * @param movieId - The TMDB movie ID
+   * @returns Array of similar movies
+   */
+  async getSimilarMovies(movieId: number): Promise<Movie[]> {
+    try {
+      const response = await client.get(`/movie/${movieId}/similar`, {
+        params: { language: "en-US", page: 1 },
+      });
+
+      return response.data.results; // Return similar movies array
+    } catch (error) {
+      logger.error(`Failed to fetch similar movies for ${movieId}:`, error);
+      return [];
+    }
+  },
+
   /**
    * Fetches all available videos for a movie (trailers, teasers, clips, etc.)
    * @param movieId - The movie ID from TMDB API.

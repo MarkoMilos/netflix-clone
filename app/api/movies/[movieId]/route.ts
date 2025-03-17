@@ -1,19 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import movieRepository from "@/repository/MovieRepository";
+import logger from "@/lib/logger";
+import TMDBService from "@/service/TMDBService";
 
-/* eslint-disable import/prefer-default-export */
+// eslint-disable-next-line import/prefer-default-export
 export async function GET(_req: NextRequest, { params }: { params: { movieId: string } }) {
-  const { movieId } = params;
-  if (!movieId) {
-    return NextResponse.json({ message: "Movie id is required" }, { status: 400 });
+  const movieId = parseInt(params.movieId, 10);
+
+  if (Number.isNaN(movieId)) {
+    return NextResponse.json({ error: "Invalid movie ID" }, { status: 400 });
   }
 
-  const movie = await movieRepository.getById(movieId);
+  try {
+    const [movie, cast, similarMovies] = await Promise.all([
+      TMDBService.getMovieById(movieId),
+      TMDBService.getMovieCast(movieId),
+      TMDBService.getSimilarMovies(movieId),
+    ]);
 
-  if (movie) {
+    movie.cast = cast;
+    movie.similar = similarMovies;
+
     return NextResponse.json(movie, { status: 200 });
-  } else {
+  } catch (error) {
+    logger.error("Error fetching movie:", error);
     return NextResponse.json({ message: "Movie not found" }, { status: 404 });
   }
 }

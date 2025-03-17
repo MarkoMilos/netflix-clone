@@ -8,6 +8,7 @@ export async function addToMyList(userId: string, content: Content): Promise<Con
     where: { id: content.id },
     update: {
       title: content.title,
+      overview: content.overview,
       posterImage: content.posterImage,
       backDropImage: content.backDropImage,
       voteRating: content.voteRating,
@@ -15,6 +16,7 @@ export async function addToMyList(userId: string, content: Content): Promise<Con
     create: {
       id: content.id,
       title: content.title,
+      overview: content.overview,
       posterImage: content.posterImage,
       backDropImage: content.backDropImage,
       releaseYear: content.releaseYear,

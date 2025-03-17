@@ -11,6 +11,7 @@ import Number6Svg from "@/assets/icons/number-6.svg";
 import Number7Svg from "@/assets/icons/number-7.svg";
 import Number8Svg from "@/assets/icons/number-8.svg";
 import Number9Svg from "@/assets/icons/number-9.svg";
+import { getPosterUrl } from "@/lib/tmdb-image";
 import { Content } from "@/types";
 
 type ContentRankCardProps = {
@@ -33,7 +34,7 @@ export default function ContentRankCard({ content, rank }: ContentRankCardProps)
       {rank === 10 && <Number10Svg className={styles.rank} />}
 
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className={styles.poster} src={content.posterImage} alt="poster" />
+      <img className={styles.poster} src={getPosterUrl(content.posterImage)} alt="poster" />
     </div>
   );
 }

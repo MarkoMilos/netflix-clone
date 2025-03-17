@@ -1,11 +1,11 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { compare } from "bcrypt";
 import { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
 import prisma from "@/lib/prismadb";
+import authorize from "@/service/AuthService";
 
 const authConfig: AuthOptions = {
   providers: [
@@ -24,29 +24,7 @@ const authConfig: AuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
-        // TODO migrate this to a service
-        if (!credentials?.email || !credentials?.password) {
-          throw new Error("Missing credentials");
-        }
-
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
-
-        if (!user || !user.hashedPassword) {
-          throw new Error("User does not exist.");
-        }
-
-        const isCorrectPassword = await compare(credentials.password, user.hashedPassword);
-        if (!isCorrectPassword) {
-          throw new Error("Invalid password");
-        }
-
-        return user;
-      },
+      authorize: async credentials => authorize(credentials?.email, credentials?.password),
     }),
   ],
   pages: {

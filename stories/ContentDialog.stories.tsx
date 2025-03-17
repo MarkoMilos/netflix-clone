@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import ContentDialog from "@/components/ContentDialog/ContentDialog";
+import { ContentDialog } from "@/components/ContentDialog";
 
 const defaultArgs = {
   content: {
     id: 1,
     title: "The Matrix",
+    overview:
+      "A computer hacker learns about the true nature of reality and his role in the war against its controllers.",
     posterImage: "https://placehold.co/200x400",
     backDropImage: "https://placehold.co/300x170",
     releaseYear: "1999",

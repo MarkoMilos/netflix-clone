@@ -5,9 +5,6 @@ const nextConfig = {
       { protocol: "http", hostname: "image.tmdb.org" },
       { protocol: "https", hostname: "image.tmdb.org" },
       { protocol: "https", hostname: "placehold.co" },
-      { protocol: "https", hostname: "picsum.photos" },
-      { protocol: "https", hostname: "upload.wikimedia.org" },
-      { protocol: "http", hostname: "commondatastorage.googleapis.com" },
     ],
   },
   webpack(config) {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import ContentCard from "@/components/ContentCard/ContentCard";
+import ContentCard from "@/components/ContentCard";
 
 const meta: Meta<typeof ContentCard> = {
   title: "Components/ContentCard",
@@ -19,6 +19,8 @@ const meta: Meta<typeof ContentCard> = {
       backDropImage: "https://placehold.co/400x200",
       releaseYear: "1994",
       voteRating: 9.3,
+      overview:
+        "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
     },
   },
   tags: ["autodocs"],

@@ -51,7 +51,6 @@
   margin: 0.25em;
 }
 
-.likeButton,
 .moreButton {
   padding: 0.8rem;
   border-radius: 50%;
@@ -66,13 +65,11 @@
   margin-left: auto;
 }
 
-.likeButton:hover,
 .moreButton:hover {
   border-color: white;
 }
 
 .playIcon,
-.likeIcon,
 .moreIcon {
   width: 1.6rem;
   height: 1.6rem;

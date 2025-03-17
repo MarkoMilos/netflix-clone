@@ -7,12 +7,12 @@ const profileService = {
     return [
       {
         id: "1",
-        name: "Marko i Tina",
+        name: "John Doe",
         image: "/images/profile1.png",
       },
       {
         id: "2",
-        name: "Starci",
+        name: "Marry Jane",
         image: "/images/profile2.png",
       },
       {
@@ -26,7 +26,7 @@ const profileService = {
   async getCurrentProfile(): Promise<Profile> {
     return {
       id: "1",
-      name: "Marko i Tina",
+      name: "John Doe",
       image: "/images/profile1.png",
     };
   },

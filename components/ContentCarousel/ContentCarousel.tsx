@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import styles from "./ContentCarousel.module.css";
-import ContentCard from "@/components/ContentCard/ContentCard";
+import ContentCard from "@/components/ContentCard";
 import { ContentDialogWrapper, DialogPosition } from "@/components/ContentDialog";
-import ContentRankCard from "@/components/ContentRankCard/ContentRankCard";
+import ContentRankCard from "@/components/ContentRankCard";
 import Icon from "@/components/Icons";
 import { ResponsiveValue, useResponsiveValue } from "@/hooks/useResponsiveValue";
 import { Content } from "@/types";

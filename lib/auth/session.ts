@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { getToken } from "next-auth/jwt";
 
 import authConfig from "@/lib/auth/config";
-import userRepository from "@/repository/UserRepository";
+import userService from "@/service/UserService";
 import { User } from "@/types";
 
 /**
@@ -72,12 +72,12 @@ export async function authUser(req?: NextRequest) {
       return null;
     }
 
-    return userRepository.findByEmail(token.email);
+    return userService.findByEmail(token.email);
   } else {
     const session = await authSession();
     const email = session?.user?.email;
     if (!email) return null;
 
-    return userRepository.findByEmail(email);
+    return userService.findByEmail(email);
   }
 }

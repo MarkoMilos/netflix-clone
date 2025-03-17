@@ -1,5 +1,5 @@
 import Billboard from "@/components/Billboard";
-import ContentCarousel from "@/components/ContentCarousel/ContentCarousel";
+import ContentCarousel from "@/components/ContentCarousel";
 import InfoModal from "@/components/InfoModal";
 import contentService from "@/service/ContentService";
 
