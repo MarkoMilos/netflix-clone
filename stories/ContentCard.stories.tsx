@@ -15,8 +15,8 @@ const meta: Meta<typeof ContentCard> = {
     content: {
       id: 1,
       title: "The Shawshank Redemption",
-      posterImage: "https://placehold.co/300x450",
-      backDropImage: "https://placehold.co/400x200",
+      posterImage: "/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg",
+      backDropImage: "/ywe9S1cOyIhR5yWzK7511NuQ2YX.jpg",
       releaseYear: "1994",
       voteRating: 9.3,
       overview:

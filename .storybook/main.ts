@@ -2,17 +2,19 @@ import type { StorybookConfig } from "@storybook/nextjs";
 
 const config: StorybookConfig = {
   stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-  staticDirs: ["../public", { from: "../public/fonts", to: "public/fonts" }],
+  staticDirs: ["../public"],
   addons: [
-    "@storybook/addon-onboarding",
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@chromatic-com/storybook",
+    "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
   ],
   framework: {
     name: "@storybook/nextjs",
     options: {},
+  },
+  docs: {
+    autodocs: "tag",
   },
   webpackFinal: async config => {
     const imageRule = config.module?.rules?.find(rule => {

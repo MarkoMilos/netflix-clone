@@ -8,8 +8,8 @@ const defaultArgs = {
     title: "The Matrix",
     overview:
       "A computer hacker learns about the true nature of reality and his role in the war against its controllers.",
-    posterImage: "https://placehold.co/200x400",
-    backDropImage: "https://placehold.co/300x170",
+    posterImage: "/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg",
+    backDropImage: "/ywe9S1cOyIhR5yWzK7511NuQ2YX.jpg",
     releaseYear: "1999",
     voteRating: 7,
     genre_ids: [1, 2],
@@ -80,15 +80,6 @@ export const NoGenres: Story = {
     content: {
       ...defaultArgs.content,
       genres: [],
-    },
-  },
-};
-
-export const SquarePoster: Story = {
-  args: {
-    content: {
-      ...defaultArgs.content,
-      backDropImage: "https://placehold.co/170x170",
     },
   },
 };
