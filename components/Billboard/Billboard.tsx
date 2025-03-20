@@ -57,49 +57,51 @@ export default function Billboard({ data }: BillboardProps) {
       <Image
         src={getBackdropUrl(data?.backdrop_path) ?? ""}
         alt={data?.title}
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: "cover" }}
       />
 
-      {/*/!* Foreground trailer player *!/*/}
-      {/*<ReactPlayer*/}
-      {/*  url={`https://www.youtube.com/embed/${trailer?.key}`}*/}
-      {/*  width="100%"*/}
-      {/*  height="100%"*/}
-      {/*  playing*/}
-      {/*  muted*/}
-      {/*  controls={false} // Hides YouTube controls*/}
-      {/*  pip={false} // Disables Picture-in-Picture*/}
-      {/*  config={{*/}
-      {/*    youtube: {*/}
-      {/*      playerVars: {*/}
-      {/*        autoplay: 1, // Auto-play*/}
-      {/*        modestbranding: 1, // Remove YouTube branding*/}
-      {/*        disablekb: 1, // Disable keyboard shortcuts*/}
-      {/*        controls: 0, // Hide player controls*/}
-      {/*        showinfo: 0, // Hide title & uploader info*/}
-      {/*        fs: 0, // Disable fullscreen button*/}
-      {/*        rel: 0, // Disable related videos at the end*/}
-      {/*        iv_load_policy: 3, // Hide annotations*/}
-      {/*        playsinline: 1, // Play inline on mobile*/}
-      {/*        mute: 1, // Mute video*/}
-      {/*      },*/}
-      {/*    },*/}
-      {/*  }}*/}
-      {/*  onDuration={handleDuration}*/}
-      {/*  onProgress={handleProgress}*/}
-      {/*  style={{*/}
-      {/*    opacity,*/}
-      {/*    transition: "opacity 2s ease-in-out",*/}
-      {/*    position: "absolute",*/}
-      {/*    top: "50%",*/}
-      {/*    left: "50%",*/}
-      {/*    transform: "translate(-50%, -50%) scale(1.38)", // Scale up slightly*/}
-      {/*    width: "110%", // Extend width slightly beyond 100%*/}
-      {/*    height: "110%", // Extend height slightly beyond 100%*/}
-      {/*    overflow: "hidden",*/}
-      {/*  }}*/}
-      {/*/>*/}
+      {/* Foreground trailer player */}
+      {/* {trailer && (
+        <ReactPlayer
+          url={`https://www.youtube.com/embed/${trailer?.key}`}
+          width="100%"
+          height="100%"
+          playing
+          muted
+          controls={false} // Hides YouTube controls
+          pip={false} // Disables Picture-in-Picture
+          config={{
+            youtube: {
+              playerVars: {
+                autoplay: 1, // Auto-play
+                modestbranding: 1, // Remove YouTube branding
+                disablekb: 1, // Disable keyboard shortcuts
+                controls: 0, // Hide player controls
+                showinfo: 0, // Hide title & uploader info
+                fs: 0, // Disable fullscreen button
+                rel: 0, // Disable related videos at the end
+                iv_load_policy: 3, // Hide annotations
+                playsinline: 1, // Play inline on mobile
+                mute: 1, // Mute video
+              },
+            },
+          }}
+          onDuration={handleDuration}
+          onProgress={handleProgress}
+          style={{
+            opacity,
+            transition: "opacity 2s ease-in-out",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%) scale(1.38)", // Scale up slightly
+            width: "110%", // Extend width slightly beyond 100%
+            height: "110%", // Extend height slightly beyond 100%
+            overflow: "hidden",
+          }}
+        />
+      )} */}
 
       {/* Layer preventing player controls */}
       <div className="absolute inset-0" onContextMenu={e => e.preventDefault()} />

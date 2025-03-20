@@ -18,13 +18,11 @@ export default async function NavBar() {
       <NavBarBackground />
       <div className="flex h-[41px] flex-row items-center px-[4%] transition duration-500 lg:h-[68px] xl:px-[60px]">
         <Link href="/" className="mr-[5px] cursor-pointer lg:mr-[25px]">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/images/logo.png"
             alt="logo"
-            width={90}
-            height={30}
-            priority
-            className="w-[40px] sm:w-[50px] md:w-[70px] lg:w-[90px]"
+            className="h-auto w-[40px] sm:w-[50px] md:w-[70px] lg:w-[90px]"
           />
         </Link>
 

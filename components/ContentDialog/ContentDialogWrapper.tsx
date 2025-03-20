@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import ContentDialog from "./ContentDialog";
 import styles from "./ContentDialogWrapper.module.css";
 import { Content } from "@/types";
@@ -13,7 +15,10 @@ export function ContentDialogWrapper({
   content: Content;
   position: DialogPosition;
 }) {
-  const dialogContainerClasses = `${styles.dialogContainer} ${styles[`dialogContainer-${position}`]}`;
+  const dialogContainerClasses = useMemo(
+    () => `${styles.dialogContainer} ${styles[`dialogContainer-${position}`]}`,
+    [position],
+  );
 
   return (
     <div className={styles.dialogWrapper}>
