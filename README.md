@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Netflix clone
+
+This is an educational Netflix clone built with modern web technologies. The application interfaces with the TMDB API for content data and uses a local PostgreSQL database for user management and personalization features.
+
+This project was created for educational purposes to demonstrate the implementation of a complex streaming platform using modern web technologies.
+
+## Usage demo
+TODO ADD DEMO VIDEO
+
+## Tech Stack
+
+- **Frontend**: Next.js, React, TypeScript
+- **Styling**: Tailwind CSS
+- **Database**: PostgreSQL
+- **ORM**: Prisma
+- **State Management**: Zustand
+- **Data Fetching**: SWR
+- **Component Development**: Storybook
+
+## Features
+
+- User authentication (login/registration)
+- Social login with Google and GitHub
+- Multiple profile selection
+- Dynamic homepage with billboard and content rows
+- Trailer video playback in billboard
+- Horizontal content carousels
+- Detailed content modal with metadata and similar content recommendations
+- Content playback page
+- "My List" functionality with dedicated page
+- Account menus with settings and sign out
+- Responsive navigation with dropdown for mobile breakpoints
+- And more...
 
 ## Getting Started
 
-First, run the development server:
+### Docker Compose Setup
+
+The easiest way to run the project is using Docker Compose:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker compose up -d
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This will start the following services:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Next.js Application**: Front-end application with source code mounted for live changes
+2. **PostgreSQL Database**: Persistent database for user data
+3. **pgAdmin**: Web-based database administration tool
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-## Learn More
+## Development
 
-To learn more about Next.js, take a look at the following resources:
+### Storybook
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project uses Storybook to preview and develop components in isolation:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Using npm
+npm run storybook
 
-## Deploy on Vercel
+# Using yarn
+yarn storybook
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Open [http://localhost:6006](http://localhost:6006) to view the component library.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is for educational purposes only and is not affiliated with Netflix or TMDB.
