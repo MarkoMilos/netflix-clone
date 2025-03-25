@@ -5,7 +5,9 @@ This is an educational Netflix clone built with modern web technologies. The app
 This project was created for educational purposes to demonstrate the implementation of a complex streaming platform using modern web technologies.
 
 ## Usage demo
-TODO ADD DEMO VIDEO
+
+[![Demo video](https://img.youtube.com/vi/4BI1LVlFMqc/0.jpg)](https://www.youtube.com/watch?v=4BI1LVlFMqc)
+
 
 ## Tech Stack
 
