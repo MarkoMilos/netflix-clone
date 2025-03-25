@@ -86,16 +86,18 @@ export default function InfoModal() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent" />
 
               <div className="absolute bottom-[5%] left-[3em] w-2/5">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={getLogoUrl(content?.images?.logos[0]?.file_path ?? null)}
-                  alt="Logo"
-                  className="mb-[1.5em] w-full"
-                />
+                {content?.images?.logos[0]?.file_path && (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={getLogoUrl(content.images.logos[0].file_path)}
+                    alt="Logo"
+                    className="mb-[1.5em] w-full"
+                  />
+                )}
 
                 {/* Action buttons */}
                 <div className="mb-[1em] flex flex-row items-center">
-                  <PlayButton className="m-[0.25em]" contentId={1} />
+                  <PlayButton className="m-[0.25em]" contentId={content.id} />
                   <MyListButton content={content} />
                   <LikeButton />
                 </div>

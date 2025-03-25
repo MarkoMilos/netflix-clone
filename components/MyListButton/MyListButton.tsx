@@ -17,20 +17,26 @@ export default function MyListButton({ content, className = "" }: MyListButtonPr
 
   const isInFavourites = useMemo(() => data?.some(item => item.id === content.id), [data, content]);
 
-  const toggleMyList = useCallback(async () => {
-    if (isLoading) return;
+  const toggleMyList = useCallback(
+    async (event: React.MouseEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
 
-    try {
-      if (isInFavourites) {
-        await removeFromMyList(content.id);
-      } else {
-        await addToMyList(content);
+      if (isLoading) return;
+
+      try {
+        if (isInFavourites) {
+          await removeFromMyList(content.id);
+        } else {
+          await addToMyList(content);
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error("Failed to toggle my-list status:", error);
       }
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error("Failed to toggle my-list status:", error);
-    }
-  }, [content, isLoading, isInFavourites, removeFromMyList, addToMyList]);
+    },
+    [content, isLoading, isInFavourites, removeFromMyList, addToMyList],
+  );
 
   return (
     <button

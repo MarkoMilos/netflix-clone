@@ -7,11 +7,12 @@ import useContentDetails from "@/hooks/useContentDetails";
 
 export default function WatchPage() {
   const router = useRouter();
-  const { id } = useParams();
-  const { data } = useContentDetails(typeof id === "string" ? parseInt(id, 10) : undefined);
-
+  const { contentId } = useParams();
+  const id = typeof contentId === "string" ? parseInt(contentId, 10) : undefined;
+  const { data } = useContentDetails(id);
   const videoKey = data?.videos?.find(video => video.site === "YouTube")?.key;
-  if (!data || !videoKey) return null;
+
+  if (!data) return null;
 
   return (
     <div className="h-screen w-screen bg-black">
@@ -24,13 +25,19 @@ export default function WatchPage() {
         </p>
       </nav>
 
-      <iframe
-        className="h-screen w-screen"
-        src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&rel=0&modestbranding=1`}
-        title={`${data.title} trailer`}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
+      {videoKey ? (
+        <iframe
+          className="h-screen w-screen"
+          src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&rel=0&modestbranding=1`}
+          title={`${data.title} trailer`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      ) : (
+        <div className="flex h-screen w-screen items-center justify-center">
+          <p className="text-2xl font-bold text-white">No video for this content</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -47,17 +47,20 @@ const contentService = {
     ]);
 
     // First assign genres to movies, then map to content items
-    const popularContentItems = popular.map(movie =>
-      mapMovieToContent(assignGenres(movie, genres)),
-    );
+    const popularContentItems = popular
+      .filter(movie => movie.poster_path && movie.backdrop_path)
+      .map(movie => mapMovieToContent(assignGenres(movie, genres)));
 
     const trendingContentItems = trending
+      .filter(movie => movie.poster_path && movie.backdrop_path)
       .map(movie => mapMovieToContent(assignGenres(movie, genres)))
       .slice(0, 10);
 
     const genreContentItemMap = byGenre.map(({ genre, movies }) => ({
       genre,
-      content: movies.map(movie => mapMovieToContent(assignGenres(movie, genres))),
+      content: movies
+        .filter(movie => movie.poster_path && movie.backdrop_path)
+        .map(movie => mapMovieToContent(assignGenres(movie, genres))),
     }));
 
     // Create content sections

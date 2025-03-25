@@ -19,7 +19,7 @@ export async function GET(_req: NextRequest, { params }: { params: { movieId: st
     ]);
 
     movie.cast = cast;
-    movie.similar = similarMovies;
+    movie.similar = similarMovies.filter(similarMovie => similarMovie.backdrop_path !== null);
 
     return NextResponse.json(movie, { status: 200 });
   } catch (error) {
