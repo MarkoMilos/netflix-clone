@@ -10,7 +10,7 @@ services:
       - .env
     ports:
       - "3000:3000"
-    command: ["/bin/sh", "-c", "yarn install && yarn dev"]
+    command: ["/bin/sh", "-c", "yarn install && npx prisma db push && yarn dev"]
     depends_on:
       - db
 
