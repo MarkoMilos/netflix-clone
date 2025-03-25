@@ -6,7 +6,7 @@ This project was created for educational purposes to demonstrate the implementat
 
 ## Usage demo
 
-[![Demo video](https://img.youtube.com/vi/4BI1LVlFMqc/0.jpg)](https://www.youtube.com/watch?v=4BI1LVlFMqc)
+[![Demo video](/assets/demo.png)](https://www.youtube.com/watch?v=4BI1LVlFMqc)
 
 
 ## Tech Stack
