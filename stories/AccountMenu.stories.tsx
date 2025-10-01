@@ -20,6 +20,11 @@ const meta: Meta<typeof AccountMenu> = {
       },
       {
         id: "2",
+        name: "Marry Jane",
+        image: "/images/profile2.png",
+      },
+      {
+        id: "3",
         name: "Kids",
         image: "/images/profile-kids.png",
       },
